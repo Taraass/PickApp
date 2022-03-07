@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Final Tryуууу</Text>
+      <Text>Final Tryyyyуууу</Text>
       <StatusBar style="auto" />
     </View>
   );
