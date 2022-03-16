@@ -53,7 +53,7 @@ export default class RegisterScreen extends React.Component {
         return (
             <View style={styles.container}>
                 <Image
-                    source = {require("../img/logo.png")}
+                    source = {require("../img/logo-main.png")}
                     style={{ height:285, width: "100%"}}>
                 </Image>
                 <Text style = {styles.greeting}>{'Welcome! \n Please, sign up:) '}</Text>

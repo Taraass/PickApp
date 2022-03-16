@@ -29,7 +29,7 @@ export default class LoginScreen extends React.Component {
                 <StatusBar barStyle = "light-content">
                 </StatusBar>
                 <Image
-                    source = {require("../img/logo.png")}
+                    source = {require("../img/logo-main.png")}
                     style={{ height:290, width: "100%"}}>
                 </Image>
                 <Text style = {styles.greeting}>{'Hello \n PickApp is for you! '}</Text>
