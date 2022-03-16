@@ -1,22 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import {createAppContainer, createSwitchNavigator} from 'react-navigation';
+import LoginScreen from './Screens/LoginScreen';
+import RegisterScreen from "./Screens/RegisterScreen";
+import {createStackNavigator} from "react-navigation-stack";
+import React from 'react';
 
-export default function App() {
-    return ( <
-        View style = { styles.container } >
-        <
-        Text > Open up Appart working on your app! < /Text> <
-        StatusBar style = "auto" / >
-        <
-        /View>
-    );
-}
+/*const AppContainer = createStackNavigator(
+    {
+      default: createBottomTabNavigator(
+          {
+            Home: {
+              screen: HomeScreen,
+              navigationOptions: {
+                  tabBarIcon: ({tintColor}) => <Ionicons name='ios-home' size={24} color={tintColor} />
+              }
+            },
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
+
+          }
+      )
+    }
+)
+*/
+
+const AuthStack = createStackNavigator( {
+    Login: LoginScreen,
+    Register: RegisterScreen
+})
+export default createAppContainer(
+    createSwitchNavigator(
+        {
+          Auth: AuthStack
+        },
+        {
+          initialRouteName: "Auth"
+        }
+    )
+)
