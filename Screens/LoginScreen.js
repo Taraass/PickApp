@@ -1,7 +1,7 @@
 import React from 'react'
 import {View, Text, StyleSheet, TextInput,TouchableOpacity, Image, StatusBar, LayoutAnimation} from 'react-native'
-//import * as firebase from "firebase";
-//import { getAuth } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import {auth} from '../firebase'
 
 export default class LoginScreen extends React.Component {
     static navigationOptions = {
@@ -15,12 +15,14 @@ export default class LoginScreen extends React.Component {
     };
 
     handleLogin = () => {
-      /*  const {email, password} = this.state;
-
-        firebase
-            .auth()
-            .signInWithEmailAndPassword(email, password)
-            .catch(error => this.setState({errorMessage: error.message}))*/
+        const {email, password} = this.state;
+        signInWithEmailAndPassword(auth,email,password)
+            .then(() => {
+                this.props.navigation.navigate('Home');
+        })
+            .catch((error) => {
+                this.setState({errorMessage: error.message})
+            })
     };
 
     render() {
