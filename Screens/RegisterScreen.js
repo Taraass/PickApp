@@ -25,7 +25,7 @@ export default class RegisterScreen extends React.Component {
                     updateProfile(auth.currentUser, {
                         displayName: this.state.name
                     })
-                    this.props.navigation.navigate('Login');
+                    this.props.navigation.navigate('Loading');
             })
                 .catch((error) => {
                    this.setState({errorMessage: error.message})
