@@ -1,5 +1,7 @@
 import React from 'react'
 import {View, Text, StyleSheet, TextInput, TouchableOpacity, Image} from 'react-native'
+import {createUserWithEmailAndPassword} from "firebase/auth";
+import {auth} from '../firebase'
 
 export default class RegisterScreen extends React.Component {
     static navigationOptions = {
@@ -7,32 +9,27 @@ export default class RegisterScreen extends React.Component {
     };
 
     state = {
-        user: {
-            name: "",
-            email: "",
-            password: "",
-            confirmPassword: "",
-            avatar: null
-        },
-        errorMessage: null
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
     };
 
-
-
     handleSignUp = () => {
-        /*const {password, confirmPassword } = this.state;
+        const {email, password } = this.state;
         if (this.state.password === this.state.confirmPassword) {
-            firebase
-                .auth()
-                .createUserWithEmailAndPassword(this.state.email, this.state.password)
-                .then(useCredentials => {
-                    return useCredentials.user.updateProfile({
-                        displayName: this.state.name
-                    });
+            createUserWithEmailAndPassword(auth, email, password).
+                then(() => {
+                    alert("Congratulations! You have been successfully registered!")
+                    this.props.navigation.navigate('Login');
+            })
+                .catch((error) => {
+                    const errorMessage = error.message;
+                    alert(errorMessage);
                 })
         } else {
             alert('Passwords do not match.');
-        }*/
+        }
     };
 
     /*  handlePickAvatar = async () => {

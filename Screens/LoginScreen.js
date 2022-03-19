@@ -1,6 +1,7 @@
 import React from 'react'
 import {View, Text, StyleSheet, TextInput,TouchableOpacity, Image, StatusBar, LayoutAnimation} from 'react-native'
 //import * as firebase from "firebase";
+//import { getAuth } from "firebase/auth";
 
 export default class LoginScreen extends React.Component {
     static navigationOptions = {
@@ -14,7 +15,7 @@ export default class LoginScreen extends React.Component {
     };
 
     handleLogin = () => {
-        /*const {email, password} = this.state;
+      /*  const {email, password} = this.state;
 
         firebase
             .auth()
