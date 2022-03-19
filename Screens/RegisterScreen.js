@@ -1,5 +1,7 @@
 import React from 'react'
-import {View, Text, StyleSheet, TextInput, TouchableOpacity, Image} from 'react-native'
+import {Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native'
+import {createUserWithEmailAndPassword, updateProfile} from "firebase/auth";
+import {auth} from '../firebase'
 
 export default class RegisterScreen extends React.Component {
     static navigationOptions = {
@@ -7,48 +9,31 @@ export default class RegisterScreen extends React.Component {
     };
 
     state = {
-        user: {
-            name: "",
-            email: "",
-            password: "",
-            confirmPassword: "",
-            avatar: null
-        },
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
         errorMessage: null
     };
 
-
-
     handleSignUp = () => {
-        /*const {password, confirmPassword } = this.state;
+        const {email, password } = this.state;
         if (this.state.password === this.state.confirmPassword) {
-            firebase
-                .auth()
-                .createUserWithEmailAndPassword(this.state.email, this.state.password)
-                .then(useCredentials => {
-                    return useCredentials.user.updateProfile({
+            createUserWithEmailAndPassword(auth, email, password).
+                then(() => {
+                    alert("Congratulations! You have been successfully registered!")
+                    updateProfile(auth.currentUser, {
                         displayName: this.state.name
-                    });
+                    })
+                    this.props.navigation.navigate('Login');
+            })
+                .catch((error) => {
+                   this.setState({errorMessage: error.message})
                 })
         } else {
             alert('Passwords do not match.');
-        }*/
+        }
     };
-
-    /*  handlePickAvatar = async () => {
-          UserPermissions.getCameraPermission();
-
-          let result = await ImagePicker.launchImageLibraryAsync({
-              mediaTypes: ImagePicker.MediaTypeOptions.Images,
-              allowsEditing: true,
-              aspect: [4, 3]
-          });
-
-          if (!result.cancelled) {
-              this.setState({ user: { ...this.state.user, avatar: result.uri } });
-          }
-      };*/
-
     render() {
         return (
             <View style={styles.container}>
@@ -57,12 +42,10 @@ export default class RegisterScreen extends React.Component {
                     style={{ height:285, width: "100%"}}>
                 </Image>
                 <Text style = {styles.greeting}>{'Welcome!  \n Please,sign up:) '}</Text>
-                <View style={styles.errorMessage}>
-                    {this.state.errorMessage && <Text style ={styles.error}>{this.state.errorMessage}</Text>}
-                </View>
-
                 <View style={styles.form}>
-
+                    <View style={styles.errorMessage}>
+                        {this.state.errorMessage && <Text style ={styles.error}>{this.state.errorMessage}</Text>}
+                    </View>
                     <View>
                         <Text style = {styles.inputTitle}>Full name</Text>
                         <TextInput
