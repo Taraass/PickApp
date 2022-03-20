@@ -1,10 +1,6 @@
 import React from 'react'
-import {View, Text, StyleSheet,FlatList, Image} from 'react-native'
+import {View, Text, StyleSheet, Image} from 'react-native'
 import { StatusBar } from 'expo-status-bar';
-import { Feather } from '@expo/vector-icons';
-import { EvilIcons } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
-
 
 export default class PostScreen extends React.Component {
 
