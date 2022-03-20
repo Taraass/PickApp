@@ -1,71 +1,51 @@
-import {createAppContainer, createSwitchNavigator} from 'react-navigation'
-import {createStackNavigator} from 'react-navigation-stack'
-import { createBottomTabNavigator } from "react-navigation-tabs";
+import {NavigationContainer} from "@react-navigation/native";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Ionicons } from "@expo/vector-icons";
+import * as React from 'react'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-
-import LoadingScreen from "./Screens/LoadingScreen";
 import HomeScreen from "./Screens/HomeScreen";
+import LoadingScreen from "./Screens/LoadingScreen";
+import ProfileScreen from "./Screens/ProfileScreen";
 import LoginScreen from "./Screens/LoginScreen";
 import RegisterScreen from "./Screens/RegisterScreen";
-import ProfileScreen from "./Screens/ProfileScreen";
 import PostScreen from "./Screens/PostScreen";
 
+const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
-import React from "react";
-
-const AppContainer = createStackNavigator(
-    {
-        default: createBottomTabNavigator(
-            {
-                Home: {
-                    screen: HomeScreen,
-                    navigationOptions: {
-                        tabBarIcon: ({ tintColor }) => <Ionicons name="ios-home" size={24} color={tintColor} />
-                    }
-                },
-
-                Post: {
-                    screen: PostScreen,
-                    navigationOptions: {
-                        tabBarIcon: ({tintColor}) => <Ionicons name="ios-add-circle" size={36} color={tintColor}/>
-                    }
-                },
-                Profile: {
-                    screen: ProfileScreen,
-                    navigationOptions: {
-                        tabBarIcon: ({ tintColor }) => <Ionicons name="ios-person" size={24} color={tintColor} />
-                    }
-                }
-            },
-            {
-                tabBarOptions: {
-                    activeTintColor: "#2c3a6b",
-                    inactiveTintColor: "#B8BBC4",
-                    showLabel: true
-                }
-            }
-        ),
-    },
-    {
-        headerMode: "none"
-    }
-);
-
-const AuthStack = createStackNavigator({
-    Login: LoginScreen,
-    Register: RegisterScreen
-});
-
-export default createAppContainer(
-    createSwitchNavigator(
-        {
-            Loading: LoadingScreen,
-            App: AppContainer,
-            Auth: AuthStack
-        },
-        {
-            initialRouteName: "Loading"
-        }
+function AppContainer() {
+    return (
+    <Tab.Navigator initialRouteName="Home">
+        <Tab.Screen options={{headerShown: false}} name="Home" component={HomeScreen}/>
+        <Tab.Screen options={{headerShown: false}} name="Post" component={PostScreen}/>
+        <Tab.Screen options={{headerShown: false}} name="Profile" component={ProfileScreen}/>
+    </Tab.Navigator>
     )
-);
+}
+
+function AuthContainer() {
+    return(
+        <Stack.Navigator initialRouteName="Login">
+            <Stack.Screen options={{headerShown: false}} name="Login" component={LoginScreen} />
+            <Stack.Screen options={{headerShown: false}} name="Register" component={RegisterScreen} />
+        </Stack.Navigator>
+    )
+}
+
+function SwitchNavigator() {
+    return (
+    <Stack.Navigator options={{headerShown: false}} initialRouteName="Loading">
+        <Stack.Screen options={{headerShown: false}} name="Loading" component={LoadingScreen} />
+        <Stack.Screen options={{headerShown: false}} name="AppContainer"  component={AppContainer} />
+        <Stack.Screen options={{headerShown: false}} name="AuthContainer" component={AuthContainer} />
+    </Stack.Navigator>
+    )
+}
+export default function App(){
+    return (
+        <NavigationContainer>
+            <SwitchNavigator/>
+        </NavigationContainer>
+    )
+}
