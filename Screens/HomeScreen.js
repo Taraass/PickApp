@@ -20,29 +20,12 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     },
-    modalText: {
-        marginBottom: 15,
-        textAlign: "center"
-    },
-    modalView: {
-        backgroundColor: "white",
-        borderRadius: 20,
-        padding: 35,
-        alignItems: "center",
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5
-    },
+
     container: {
-        flex: 1,
+        marginTop: '10%'
     },
     tinyLogo: {
-        marginTop: 40,
+        marginTop: 0,
         width: '100%',
         height: 300,
     },

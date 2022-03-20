@@ -17,9 +17,21 @@ const Stack = createNativeStackNavigator();
 function AppContainer() {
     return (
     <Tab.Navigator initialRouteName="Home">
-        <Tab.Screen options={{headerShown: false}} name="Home" component={HomeScreen}/>
-        <Tab.Screen options={{headerShown: false}} name="Post" component={PostScreen}/>
-        <Tab.Screen options={{headerShown: false}} name="Profile" component={ProfileScreen}/>
+        <Tab.Screen
+            options={{
+                headerShown: false,
+                tabBarIcon: ({tintColor}) => <Ionicons name='ios-home' size={24} color={tintColor} />
+        }} name="Home" component={HomeScreen}/>
+        <Tab.Screen
+            options={{
+                headerShown: false,
+                tabBarIcon: ({tintColor}) => <Ionicons name="ios-add-circle" size={36} color={tintColor}/>
+        }} name="Post" component={PostScreen}/>
+        <Tab.Screen
+            options={{
+                headerShown: false,
+                tabBarIcon: ({ tintColor }) => <Ionicons name="ios-person" size={24} color={tintColor} />
+        }} name="Profile" component={ProfileScreen}/>
     </Tab.Navigator>
     )
 }
