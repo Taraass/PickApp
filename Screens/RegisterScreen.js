@@ -24,9 +24,9 @@ export default class RegisterScreen extends React.Component {
                     alert("Congratulations! You have been successfully registered!")
                     updateProfile(auth.currentUser, {
                         displayName: this.state.name
-                    })
-                    this.props.navigation.navigate('Login');
-            })
+                    }).then(r =>
+                    this.props.navigation.navigate('Loading')
+            )})
                 .catch((error) => {
                    this.setState({errorMessage: error.message})
                 })

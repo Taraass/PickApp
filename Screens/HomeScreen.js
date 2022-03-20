@@ -1,34 +1,50 @@
 import React from 'react'
-import {View, Text, StyleSheet,FlatList, Image} from 'react-native'
-import { StatusBar } from 'expo-status-bar';
-import { Feather } from '@expo/vector-icons';
-import { EvilIcons } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
-
+import {View, Modal,Text, StyleSheet, Image} from 'react-native'
 
 export default class HomeScreen extends React.Component {
 
     render() {
         return (
             <View style={styles.container}>
-                <Text style={{color: "#000"}}>Ше ніц нема, дивись на Бодю</Text>
                 <Image
                     style={styles.tinyLogo}
-                    source={require('../img/bodia.jpg')}
+                    source={require('../img/photo.png')}
                 />
-                <StatusBar style="auto" />
             </View>
         );
     }
 }
 const styles = StyleSheet.create({
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: "center"
+    },
+    modalView: {
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 35,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+    },
     container: {
-        paddingTop: 50,
+        flex: 1,
     },
     tinyLogo: {
+        marginTop: 40,
         width: '100%',
-        marginTop: 150,
-        height: 500,
+        height: 300,
     },
     logo: {
         width: 66,

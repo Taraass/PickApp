@@ -5,7 +5,7 @@ import {auth} from "../firebase";
 export default class LoadingScreen extends React.Component {
     componentDidMount() {
         auth.onAuthStateChanged(user =>{
-            this.props.navigation.navigate(user ? "App" : "Auth")
+            this.props.navigation.navigate(user ? "AppContainer" : "AuthContainer")
         })
     }
 
