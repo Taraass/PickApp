@@ -1,7 +1,7 @@
 import React from 'react'
 import {View, Text, StyleSheet, TextInput,TouchableOpacity, Image, StatusBar, LayoutAnimation} from 'react-native'
 import { signInWithEmailAndPassword } from "firebase/auth";
-import {auth} from '../firebase'
+import {auth} from '../firebaseAuth'
 
 export default class LoginScreen extends React.Component {
     static navigationOptions = {
@@ -60,13 +60,6 @@ export default class LoginScreen extends React.Component {
                 </View>
                 <TouchableOpacity style={styles.button} onPress={this.handleLogin}>
                     <Text style={{color: "#fff", fontWeight: "500"}}>Sign in</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={{alignSelf: "center", marginTop: 32}}
-                                  onPress={() => this.props.navigation.navigate("Register")}>
-                    <Text style = {{color: "#414959", fontSize: 13}}>
-                        New to PickApp? <Text style = {{fontWeight: "500", color: "#2a9ed2"}}>Sign up</Text>
-                    </Text>
                 </TouchableOpacity>
             </View>
         )
