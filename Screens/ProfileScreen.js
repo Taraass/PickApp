@@ -1,7 +1,7 @@
 import React from 'react'
 import {View, Text, StyleSheet, Image,TouchableOpacity} from 'react-native'
 import { StatusBar } from 'expo-status-bar';
-import {auth} from "../firebase";
+import {auth} from "../firebaseAuth";
 
 export default class ProfileScreen extends React.Component {
 

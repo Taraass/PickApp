@@ -1,28 +1,41 @@
 import React from 'react'
-import {View, Modal,Text, StyleSheet, Image} from 'react-native'
+import {View, Text, StyleSheet, Image, TextInput} from 'react-native'
+import {getDatabase, ref, child, get} from "firebase/database";
 
 export default class HomeScreen extends React.Component {
 
+    state = {
+        arrival: "",
+        depart: ""
+    }
     render() {
+        const dbRef = ref(getDatabase());
+        get(child(dbRef, `trip/departune`))
+            .then((snapshot)=>{
+                if(snapshot.exists()){
+                    this.setState({arrival: snapshot.val()});
+                }else{
+                    alert('Sorry, there are no records on database');
+                }
+            }).catch((error) => {
+                alert(error.message);
+        });
         return (
             <View style={styles.container}>
                 <Image
                     style={styles.tinyLogo}
-                    source={require('../img/photo.png')}
+                    source={require('../img/photo2.png')}
                 />
+                <View>
+                    <Text style = {styles.inputTitle}>{this.state.arrival}</Text>
+                </View>
             </View>
         );
     }
 }
 const styles = StyleSheet.create({
-    centeredView: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-    },
-
     container: {
-        marginTop: '10%'
+        flex: 1
     },
     tinyLogo: {
         marginTop: 0,
@@ -32,5 +45,17 @@ const styles = StyleSheet.create({
     logo: {
         width: 66,
         height: 58,
+    },
+    inputTitle: {
+        color: "#8A8F9E",
+        fontSize: 10,
+        textTransform: "uppercase"
+    },
+    input: {
+        borderBottomColor: "#8A8F9E",
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        height: 30,
+        fontSize: 15,
+        color: "#161F3D"
     },
 });
