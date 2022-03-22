@@ -34,15 +34,16 @@ export default class HomeScreen extends React.Component {
                 <View style={styles.modal}>
                 <Entypo name="chevron-small-left" size={24} color="black" />
                     <TextInput style ={styles.input} autoCapitalize = "none"
-                        placeholder='Виїжджаєте з'/>
+                        placeholder='Route from ...'/>
                 <Entypo name="chevron-small-right" size={24} color="black" />
                 <Entypo name="chevron-small-left" size={24} color="black" />
                     <TextInput style ={styles.input} autoCapitalize = "none"
-                        placeholder='Прямуєте до'/>
+                        placeholder='Route to ...'/>
                 <Entypo name="chevron-small-right" size={24} color="black" /> 
+
                 <TouchableOpacity style={styles.place} onPress={() => alert('Треба, щоб хтось зробив ту дату, бляха')}>
                     <MaterialIcons name="date-range" style={styles.iconDate} size={30} color="black" />
-                    <Text style = {styles.textToday}>{'Сьогодні'}</Text>
+                    <Text style = {styles.textToday}>{'Today'}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.place} onPress={() => alert('Неа, не робе')}>
                     <Ionicons name="person" style={styles.iconPerson} size={24} color="black" />
@@ -50,7 +51,7 @@ export default class HomeScreen extends React.Component {
                 </TouchableOpacity>
                 </View>
                 <TouchableOpacity style={styles.button} onPress={() => alert('Ше не шукає ніц')}>
-                    <Text style={{color: "#fff", fontWeight: "500"}}>Шукати</Text>
+                    <Text style={{color: "#fff", fontWeight: "500"}}>Search</Text>
                 </TouchableOpacity>
                 
             </View>
@@ -77,7 +78,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         flexDirection: "row",
-        flexWrap: "wrap" 
+        flexWrap: "wrap",
+        justifyContent: 'space-between'
     },
     input: {
         borderBottomColor: "#373f9e",
@@ -104,12 +106,12 @@ const styles = StyleSheet.create({
     },
     iconDate:{
         color: 'grey',
-        marginLeft: '20%',
+        marginLeft: 30,
         marginRight: 15 
     }, 
     iconPerson: {
         color: 'grey',
-        marginLeft: '30%',
+        marginLeft: '14%',
         marginRight: 15 
     },
     place: {

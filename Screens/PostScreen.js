@@ -27,14 +27,14 @@ export default class PostScreen extends React.Component {
                 <AntDesign name="caretup" size={18} color="black" />
                 </View>
                 <View style={styles.modal2}>
-                <Text style = {styles.textQuestion}>{'Коли ви збираєтесь вирушати?'}</Text>
+                <Text style = {styles.textQuestion}>{'When are you going to ride?'}</Text>
                 <TouchableOpacity style={styles.place} onPress={() => alert('Треба, щоб хтось зробив ту дату, бляха')}>
                     <MaterialIcons name="date-range" style={styles.iconDate} size={30} color="black" />
-                    <Text style = {styles.textToday}>{'Сьогодні'}</Text>
+                    <Text style = {styles.textToday}>{'Today'}</Text>
                 </TouchableOpacity>
                 </View>
                 <TouchableOpacity style={styles.button} onPress={() => alert('Колись та й створить')}>
-                    <Text style={{color: "#fff", fontWeight: "500"}}>Створити поїздку</Text>
+                    <Text style={{color: "#fff", fontWeight: "500"}}>Create a trip</Text>
                 </TouchableOpacity>
                 
             </View>
@@ -94,8 +94,9 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     textQuestion: {
-        marginLeft: 20,
-        marginTop: 10
+        marginLeft: 27,
+        marginTop: 11,
+        fontSize: 17
     },
     textToday: {
         color: 'grey',

@@ -25,7 +25,7 @@ export default class RegisterScreen extends React.Component {
                     updateProfile(auth.currentUser, {
                         displayName: this.state.name
                     }).then(r =>
-                    this.props.navigation.navigate('Loading')
+                    this.props.navigation.navigate('Home')
             )})
                 .catch((error) => {
                    this.setState({errorMessage: error.message})
@@ -91,7 +91,7 @@ export default class RegisterScreen extends React.Component {
                 <TouchableOpacity style={{alignSelf: "center", marginTop: 32}}
                                   onPress={() => this.props.navigation.navigate("Login")}>
                     <Text style = {{color: "#414959", fontSize: 13}}>
-                        Already in PickApp? <Text style = {{fontWeight: "500", color: "#152fe9"}}>Login</Text>
+                        Already in PickApp? <Text style = {{fontWeight: "500", color: "#2a9ed2"}}>Login</Text>
                     </Text>
                 </TouchableOpacity>
             </View>
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 30
     },
     inputTitle: {
-        color: "#8A8F9E",
+        color: "#31239e",
         fontSize: 10,
         textTransform: "uppercase"
     },
