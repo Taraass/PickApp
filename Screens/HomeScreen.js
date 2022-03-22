@@ -1,4 +1,5 @@
 import React from 'react'
+
 import {View, Text, StyleSheet, Image, TextInput, TouchableOpacity} from 'react-native'
 import { Entypo } from '@expo/vector-icons'; 
 import { MaterialIcons } from '@expo/vector-icons'; 
@@ -24,7 +25,19 @@ export default class HomeScreen extends React.Component {
                 alert(error.message);
         });*/
         
+
     render() {
+        const dbRef = ref(getDatabase());
+        get(child(dbRef, `trip/departune`))
+            .then((snapshot)=>{
+                if(snapshot.exists()){
+                    this.setState({arrival: snapshot.val()});
+                }else{
+                    alert('Sorry, there are no records on database');
+                }
+            }).catch((error) => {
+                alert(error.message);
+        });
         return (
             <View style={styles.container}>
                 <Image
@@ -52,16 +65,15 @@ export default class HomeScreen extends React.Component {
                 <TouchableOpacity style={styles.button} onPress={() => alert('Ше не шукає ніц')}>
                     <Text style={{color: "#fff", fontWeight: "500"}}>Шукати</Text>
                 </TouchableOpacity>
-                
             </View>
         );
     }
 }
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: "center"
+
     },
     mainpicture: {
         marginTop: 0,
@@ -121,4 +133,5 @@ const styles = StyleSheet.create({
         marginTop: 2,
         fontSize: 18,
     }
+
 });
