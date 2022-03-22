@@ -2,9 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d022d181-165f-48c3-a6e1-2dd4d6fae5f9" name="Changes" comment="Adding Login and Register page">
+      <change afterPath="$PROJECT_DIR$/firebaseAuth.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/firebaseStorage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/photo2.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Screens/HomeScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/Screens/HomeScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Screens/LoadingScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/Screens/LoadingScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Screens/LoginScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/Screens/LoginScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Screens/ProfileScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/Screens/ProfileScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Screens/RegisterScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/Screens/RegisterScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/firebase.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +85,7 @@
       <workItem from="1647680494850" duration="2425000" />
       <workItem from="1647683896033" duration="23398000" />
       <workItem from="1647793431367" duration="3552000" />
-      <workItem from="1647800871248" duration="8577000" />
+      <workItem from="1647800871248" duration="15713000" />
     </task>
     <task id="LOCAL-00001" summary="Adding Login and Register page">
       <created>1647452282628</created>

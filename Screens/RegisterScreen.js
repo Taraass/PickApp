@@ -1,7 +1,7 @@
 import React from 'react'
 import {Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native'
 import {createUserWithEmailAndPassword, updateProfile} from "firebase/auth";
-import {auth} from '../firebase'
+import {auth} from '../firebaseAuth'
 
 export default class RegisterScreen extends React.Component {
     static navigationOptions = {

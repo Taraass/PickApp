@@ -1,7 +1,7 @@
 import React from 'react'
 import {View, Text, StyleSheet, TextInput,TouchableOpacity, Image, StatusBar, LayoutAnimation} from 'react-native'
 import { signInWithEmailAndPassword } from "firebase/auth";
-import {auth} from '../firebase'
+import {auth} from '../firebaseAuth'
 
 export default class LoginScreen extends React.Component {
     static navigationOptions = {
