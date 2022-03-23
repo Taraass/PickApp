@@ -1,13 +1,13 @@
 import React from 'react'
 
 import {View, Text, StyleSheet, Image, TextInput, TouchableOpacity} from 'react-native'
-import { Entypo } from '@expo/vector-icons'; 
-import { MaterialIcons } from '@expo/vector-icons'; 
+import { Entypo } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 
 
 export default class HomeScreen extends React.Component {
-    
+
     state = {
         arrival: "",
         depart: "",
@@ -26,8 +26,8 @@ export default class HomeScreen extends React.Component {
             }).catch((error) => {
                 alert(error.message);
         });*/
-        
-    render() {    
+
+    render() {
         return (
             <View style={styles.container}>
                 <Image
@@ -46,7 +46,7 @@ export default class HomeScreen extends React.Component {
                         onChangeText={depart => this.setState({depart})}
                         value={this.state.depart}
                         placeholder='Route to ...'/>
-                <Entypo name="chevron-small-right" size={24} color="black" /> 
+                <Entypo name="chevron-small-right" size={24} color="black" />
                 <TouchableOpacity style={styles.place} onPress={() => alert('Треба, щоб хтось зробив ту дату, бляха')}>
                     <MaterialIcons name="date-range" style={styles.iconDate} size={30} color="black" />
                     <Text style = {styles.textToday}>{'Today'}</Text>
@@ -56,7 +56,7 @@ export default class HomeScreen extends React.Component {
                     <TextInput style = {styles.number}>{'1'}</TextInput>
                 </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={styles.button} onPress={() => alert('Ше не працює')}>
+                <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("Search")}>
                     <Text style={{color: "#fff", fontWeight: "500"}}>Search</Text>
                 </TouchableOpacity>
             </View>
@@ -112,12 +112,12 @@ const styles = StyleSheet.create({
     iconDate:{
         color: 'grey',
         marginLeft: 30,
-        marginRight: 15 
-    }, 
+        marginRight: 15
+    },
     iconPerson: {
         color: 'grey',
         marginLeft: '14%',
-        marginRight: 15 
+        marginRight: 15
     },
     place: {
         marginTop: 40,

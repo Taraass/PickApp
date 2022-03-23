@@ -1,7 +1,7 @@
 import React from 'react'
 import {View, Text, StyleSheet, Image, TextInput, TouchableOpacity} from 'react-native'
-import { MaterialIcons } from '@expo/vector-icons'; 
-import { AntDesign } from '@expo/vector-icons'; 
+import { MaterialIcons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import { collection, addDoc} from "firebase/firestore";
 import {auth} from '../firebaseAuth';
 import {db} from '../firebaseStorage'
@@ -13,8 +13,8 @@ export default class PostScreen extends React.Component {
         depart: "",
         driverName: ""
     }
-    
-    _storeData = async() => {
+
+    storeData = async() => {
         try {
             const user = auth.currentUser;
             this.state.driverName = user.displayName;
@@ -59,10 +59,10 @@ export default class PostScreen extends React.Component {
                     <Text style = {styles.textToday}>{'Today'}</Text>
                 </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={styles.button} onPress={() => this._storeData()}>
+                <TouchableOpacity style={styles.button} onPress={() => this.storeData()}>
                     <Text style={{color: "#fff", fontWeight: "500"}}>Create a trip</Text>
                 </TouchableOpacity>
-                
+
             </View>
         );
     }
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         flexDirection: "row",
-        flexWrap: "wrap" 
+        flexWrap: "wrap"
     },
     modal2: {
         width: '80%',
@@ -132,12 +132,12 @@ const styles = StyleSheet.create({
     iconDate:{
         color: 'grey',
         marginLeft: '20%',
-        marginRight: 15 
-    }, 
+        marginRight: 15
+    },
     iconPerson: {
         color: 'grey',
         marginLeft: '30%',
-        marginRight: 15 
+        marginRight: 15
     },
     place: {
         marginTop: 25,
