@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, Image, TextInput, TouchableOpacity} from 'react-
 import { MaterialIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { collection, addDoc} from "firebase/firestore";
+import {auth} from '../firebaseAuth';
 import {db} from '../firebaseStorage'
 
 export default class PostScreen extends React.Component {
@@ -10,13 +11,17 @@ export default class PostScreen extends React.Component {
     state = {
         arrival: "",
         depart: "",
+        driverName: ""
     }
 
     storeData = async() => {
         try {
+            const user = auth.currentUser;
+            this.state.driverName = user.displayName;
             await addDoc(collection(db, "Trip"), {
               arrive: this.state.arrival,
-              departune: this.state.depart
+              departune: this.state.depart,
+              driver: this.state.driverName
             });
             alert("Поїздку додано!");
         } catch (e) {

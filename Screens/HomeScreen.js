@@ -125,8 +125,7 @@ const styles = StyleSheet.create({
     },
     number: {
         color: 'grey',
-        marginTop: 2,
-        fontSize: 18,
+        fontSize: 18
     }
 
 });
