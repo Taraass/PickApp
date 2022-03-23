@@ -1,11 +1,28 @@
 import React from 'react'
 import {View, Text, StyleSheet, Image, TextInput, TouchableOpacity} from 'react-native'
-import { Entypo } from '@expo/vector-icons'; 
 import { MaterialIcons } from '@expo/vector-icons'; 
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons'; 
+import { collection, addDoc} from "firebase/firestore";
+import {db} from '../firebaseStorage'
 
 export default class PostScreen extends React.Component {
+
+    state = {
+        arrival: "",
+        depart: "",
+    }
+    
+    _storeData = async() => {
+        try {
+            await addDoc(collection(db, "Trip"), {
+              arrive: this.state.arrival,
+              departune: this.state.depart
+            });
+            alert("Поїздку додано!");
+        } catch (e) {
+            alert("Error adding document: ", e);
+        }
+    }
 
     render() {
         return (
@@ -17,12 +34,16 @@ export default class PostScreen extends React.Component {
                 <View style={styles.modal}>
                 <AntDesign name="caretdown" size={18} color="black" />
                     <TextInput style ={styles.input} autoCapitalize = "none"
+                        onChangeText={depart => this.setState({depart})}
+                        value={this.state.depart}
                         placeholder='Route from ...'/>
                 <AntDesign name="caretdown" size={18} color="black" />
                 </View>
                 <View style={styles.modal}>
                 <AntDesign name="caretup" size={18} color="black" />
                     <TextInput style ={styles.input} autoCapitalize = "none"
+                        onChangeText={arrival => this.setState({arrival})}
+                        value={this.state.arrival}
                         placeholder='Route to ...'/>
                 <AntDesign name="caretup" size={18} color="black" />
                 </View>
@@ -33,7 +54,7 @@ export default class PostScreen extends React.Component {
                     <Text style = {styles.textToday}>{'Today'}</Text>
                 </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={styles.button} onPress={() => alert('Колись та й створить')}>
+                <TouchableOpacity style={styles.button} onPress={() => this._storeData()}>
                     <Text style={{color: "#fff", fontWeight: "500"}}>Create a trip</Text>
                 </TouchableOpacity>
                 

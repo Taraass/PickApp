@@ -3,16 +3,18 @@ import React from 'react'
 import {View, Text, StyleSheet, Image, TextInput, TouchableOpacity} from 'react-native'
 import { Entypo } from '@expo/vector-icons'; 
 import { MaterialIcons } from '@expo/vector-icons'; 
-import { Ionicons } from '@expo/vector-icons'; 
-//import {getDatabase, ref, child, get} from "firebase/database";
+import { Ionicons } from '@expo/vector-icons';
 
 
 export default class HomeScreen extends React.Component {
     
-    /*state = {
+    state = {
         arrival: "",
-        depart: ""
+        depart: "",
+        numberOfPass: ""
     }
+
+    /*
     const dbRef = ref(getDatabase());
         get(child(dbRef, `trip/departune`))
             .then((snapshot)=>{
@@ -25,19 +27,7 @@ export default class HomeScreen extends React.Component {
                 alert(error.message);
         });*/
         
-
-    render() {
-        const dbRef = ref(getDatabase());
-        get(child(dbRef, `trip/departune`))
-            .then((snapshot)=>{
-                if(snapshot.exists()){
-                    this.setState({arrival: snapshot.val()});
-                }else{
-                    alert('Sorry, there are no records on database');
-                }
-            }).catch((error) => {
-                alert(error.message);
-        });
+    render() {    
         return (
             <View style={styles.container}>
                 <Image
@@ -47,23 +37,26 @@ export default class HomeScreen extends React.Component {
                 <View style={styles.modal}>
                 <Entypo name="chevron-small-left" size={24} color="black" />
                     <TextInput style ={styles.input} autoCapitalize = "none"
+                        onChangeText={arrival => this.setState({arrival})}
+                        value={this.state.arrival}
                         placeholder='Route from ...'/>
                 <Entypo name="chevron-small-right" size={24} color="black" />
                 <Entypo name="chevron-small-left" size={24} color="black" />
                     <TextInput style ={styles.input} autoCapitalize = "none"
+                        onChangeText={depart => this.setState({depart})}
+                        value={this.state.depart}
                         placeholder='Route to ...'/>
                 <Entypo name="chevron-small-right" size={24} color="black" /> 
-
                 <TouchableOpacity style={styles.place} onPress={() => alert('Треба, щоб хтось зробив ту дату, бляха')}>
                     <MaterialIcons name="date-range" style={styles.iconDate} size={30} color="black" />
                     <Text style = {styles.textToday}>{'Today'}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.place} onPress={() => alert('Неа, не робе')}>
+                <TouchableOpacity style={styles.place} onPress={() => this.setState(numberOfPass)}>
                     <Ionicons name="person" style={styles.iconPerson} size={24} color="black" />
-                    <Text style = {styles.number}>{'1'}</Text>
+                    <TextInput style = {styles.number}>{'1'}</TextInput>
                 </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={styles.button} onPress={() => alert('Ше не шукає ніц')}>
+                <TouchableOpacity style={styles.button} onPress={() => alert('Ше не працює')}>
                     <Text style={{color: "#fff", fontWeight: "500"}}>Search</Text>
                 </TouchableOpacity>
             </View>
