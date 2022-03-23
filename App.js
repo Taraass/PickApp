@@ -10,6 +10,7 @@ import ProfileScreen from "./Screens/ProfileScreen";
 import LoginScreen from "./Screens/LoginScreen";
 import RegisterScreen from "./Screens/RegisterScreen";
 import PostScreen from "./Screens/PostScreen";
+import SearchScreen from "./Screens/SearchScreen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -51,6 +52,7 @@ function SwitchNavigator() {
         <Stack.Screen options={{headerShown: false}} name="Loading" component={LoadingScreen} />
         <Stack.Screen options={{headerShown: false}} name="AppContainer"  component={AppContainer} />
         <Stack.Screen options={{headerShown: false}} name="AuthContainer" component={AuthContainer} />
+        <Stack.Screen options={{headerShown: false}} name="Search" component={SearchScreen} />
     </Stack.Navigator>
     )
 }
