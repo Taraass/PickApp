@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="d022d181-165f-48c3-a6e1-2dd4d6fae5f9" name="Changes" comment="Adding Login and Register page">
-      <change afterPath="$PROJECT_DIR$/firebaseAuth.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/firebaseStorage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/photo2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Screens/SearchScreen.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Screens/HomeScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/Screens/HomeScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Screens/LoadingScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/Screens/LoadingScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Screens/LoginScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/Screens/LoginScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Screens/ProfileScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/Screens/ProfileScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Screens/RegisterScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/Screens/RegisterScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/firebase.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Screens/PostScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/Screens/PostScreen.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +56,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2021.3.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -86,7 +85,6 @@
       <workItem from="1647683896033" duration="23398000" />
       <workItem from="1647793431367" duration="3552000" />
       <workItem from="1647800871248" duration="13703000" />
-
     </task>
     <task id="LOCAL-00001" summary="Adding Login and Register page">
       <created>1647452282628</created>
@@ -151,6 +149,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
