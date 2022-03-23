@@ -9,10 +9,6 @@ export default class ProfileScreen extends React.Component {
         name: "",
     };
 
-    handleError = () => {
-        alert('Ви шо, на приколі, один з другим...')
-    }
-
     handleLogOut = () => {
         auth.signOut()
             .then()
@@ -21,13 +17,11 @@ export default class ProfileScreen extends React.Component {
             })
     };
 
-
     render() {
         const user = auth.currentUser;
         if(user !== null) {
             this.state.name = user.displayName;
         }
-
         return (
             <View style={styles.container}>
                 <View style={styles.upPart}>
