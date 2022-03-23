@@ -1,4 +1,5 @@
 import React from 'react'
+
 import {View, Text, StyleSheet, Image, TextInput, TouchableOpacity} from 'react-native'
 import { Entypo } from '@expo/vector-icons'; 
 import { MaterialIcons } from '@expo/vector-icons'; 
@@ -62,11 +63,11 @@ export default class HomeScreen extends React.Component {
         );
     }
 }
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: "center"
+
     },
     mainpicture: {
         marginTop: 0,
@@ -127,4 +128,5 @@ const styles = StyleSheet.create({
         marginTop: 2,
         fontSize: 18,
     }
+
 });
