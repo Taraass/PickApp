@@ -1,6 +1,8 @@
 import React from 'react'
 import {View, Text, StyleSheet, Image, ImageBackground, TouchableOpacity, ScrollView} from 'react-native'
 import {auth} from "../firebaseAuth";
+import {launchImageLibrary} from "react-native-image-picker";
+import * as ImagePicker from 'expo-image-picker';
 
 export default class ProfileScreen extends React.Component {
 
@@ -9,10 +11,11 @@ export default class ProfileScreen extends React.Component {
         phoneNumber: "",
         email: "",
         carBrand: "",
-        carColor: ""
+        carColor: "",
+        image: require("../img/no-img.jpg")
     };
 
-    
+
     handleLogOut = () => {
         auth.signOut()
             .then()
@@ -20,6 +23,8 @@ export default class ProfileScreen extends React.Component {
                 alert(error.message);
             })
     };
+
+
 
     render() {
         const user = auth.currentUser;
@@ -34,7 +39,7 @@ export default class ProfileScreen extends React.Component {
                 source={require('../img/backProfile.jpg')}>
                     <View style={styles.avatarContainer}>
                         <Image
-                            source={require("../img/no-img.jpg")}
+                            source={this.state.image}
                             style={styles.avatar}
                         />
                     </View>
@@ -96,7 +101,7 @@ const styles = StyleSheet.create({
     },
     upPart:{
         alignItems: "center",
-        height: 270 
+        height: 270
     },
     avatar: {
         width: 110,
