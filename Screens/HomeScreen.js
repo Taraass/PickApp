@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import {View, Text, StyleSheet, ImageBackground, TextInput, TouchableOpacity} from 'react-native'
 import { Entypo } from '@expo/vector-icons';
@@ -7,20 +7,12 @@ import { Ionicons } from '@expo/vector-icons';
 import SearchScreen from './SearchScreen';
 
 
-export default class HomeScreen extends React.Component {
+export default function HomeScreen({ navigation: { navigate } }) {
 
-    state = {
-        arrival: "",
-        depart: "",
-        numberOfPass: ""
-    }
+    const [departune, setDepartune] = useState("")
+    const [arrival, setArrival] = useState('')
+    const [numberOfPass, setNumberOfPass] = useState('')
 
-    test = () => {
-        <SearchScreen arr = "Kyivv"/>
-        this.props.navigation.navigate("Search");
-        console.log(this.state.arrival)
-    }
-    render() {
         return (
             <View style={styles.container}>
                 <ImageBackground
@@ -30,32 +22,32 @@ export default class HomeScreen extends React.Component {
                     <View style={styles.modal}>
                 <Entypo name="chevron-small-left" size={24} color="black" />
                     <TextInput style ={styles.input} autoCapitalize = "none"
-                        onChangeText={depart => this.setState({depart})}
-                        value={this.state.depart}
+                        onChangeText={departune => setDepartune(departune)}
+                        value={departune}
                         placeholder='Route from ...'/>
                 <Entypo name="chevron-small-right" size={24} color="black" />
                 <Entypo name="chevron-small-left" size={24} color="black" />
                     <TextInput style ={styles.input} autoCapitalize = "none"
-                        onChangeText={arrival => this.setState({arrival})}
-                        value={this.state.arrival}
+                        onChangeText={arrival => setArrival(arrival)}
+                        value={arrival}
                         placeholder='Route to ...'/>
                 <Entypo name="chevron-small-right" size={24} color="black" />
                 <TouchableOpacity style={styles.place} onPress={() => alert('Треба, щоб хтось зробив ту дату, бляха')}>
                     <MaterialIcons name="date-range" style={styles.iconDate} size={30} color="black" />
                     <Text style = {styles.textToday}>{'Today'}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.place} onPress={() => this.setState(numberOfPass)}>
+                <TouchableOpacity style={styles.place} onPress={() => setNumberOfPass(numberOfPass)}>
                     <Ionicons name="person" style={styles.iconPerson} size={24} color="black" />
                     <TextInput style = {styles.number}>{'1'}</TextInput>
                 </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={styles.button} onPress={() => this.test()}>
+                <TouchableOpacity style={styles.button} onPress={() => navigate("Search")}>
                     <Text style={{color: "#fff", fontWeight: "500"}}>Search</Text>
                 </TouchableOpacity>
                 </ImageBackground>
+                <SearchScreen/>
             </View>
         );
-    }
 }
 const styles = StyleSheet.create({
     container: {
