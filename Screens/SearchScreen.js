@@ -18,7 +18,7 @@ export default class SearchScreen extends React.Component {
             console.log('Mappp');
         }
         /*return(
-            <FlatList 
+            <FlatList
                 data={myMap}
                 renderItem={({ item }) => <Text style={styles.item}>{item.arrival}</Text>}
                 keyExtractor={(item) => item.id}
@@ -38,13 +38,14 @@ export default class SearchScreen extends React.Component {
             const querySnapshot = await getDocs(q);
             querySnapshot.forEach((doc) => {
                 myMap.set(doc.id, doc.data())
+
                 // doc.data() is never undefined for query doc snapshots
                 //this.setState({depart: doc.data().departune})
                 //this.setState({arrival: doc.data().arrive})
                 //this.setState({driver: doc.data().driver})
             });
             console.log("Map:", myMap.get('cnh3oC8qhfpp1nREGZ8j'))
-            
+
        } catch (e) {
             alert("Error adding document: ", e.message);
        }
@@ -61,7 +62,7 @@ export default class SearchScreen extends React.Component {
                         </View>
                         <View style={styles.row}>
                             <Text style={styles.tripInfo}>16:40</Text>
-                            <Text style={styles.tripResult}>{this.state.depart}</Text> 
+                            <Text style={styles.tripResult}>{this.state.depart}</Text>
                         </View>
                     </View>
                     <View style={styles.row}>
@@ -72,7 +73,7 @@ export default class SearchScreen extends React.Component {
                             />
                         </View>
                         <Text style={styles.name}>{this.state.driver}</Text>
-                        <Text style={styles.tripInfoPrice}>300</Text>   
+                        <Text style={styles.tripInfoPrice}>300</Text>
                     </View>
                 </View>
             </View>
