@@ -1,6 +1,8 @@
 import React from 'react'
 import {View, Text, StyleSheet, Image, ImageBackground, TouchableOpacity, ScrollView} from 'react-native'
 import {auth} from "../firebaseAuth";
+import {launchImageLibrary} from "react-native-image-picker";
+import * as ImagePicker from 'expo-image-picker';
 
 export default class ProfileScreen extends React.Component {
 
@@ -34,7 +36,7 @@ export default class ProfileScreen extends React.Component {
                 source={require('../img/backProfile.jpg')}>
                     <View style={styles.avatarContainer}>
                         <Image
-                            source={require("../img/no-img.jpg")}
+                            source={this.state.image}
                             style={styles.avatar}
                         />
                     </View>
