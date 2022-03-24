@@ -1,9 +1,10 @@
 import React from 'react'
 
-import {View, Text, StyleSheet, Image, TextInput, TouchableOpacity} from 'react-native'
+import {View, Text, StyleSheet, ImageBackground, TextInput, TouchableOpacity} from 'react-native'
 import { Entypo } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+import SearchScreen from './SearchScreen';
 
 
 export default class HomeScreen extends React.Component {
@@ -14,37 +15,29 @@ export default class HomeScreen extends React.Component {
         numberOfPass: ""
     }
 
-    /*
-    const dbRef = ref(getDatabase());
-        get(child(dbRef, `trip/departune`))
-            .then((snapshot)=>{
-                if(snapshot.exists()){
-                    this.setState({arrival: snapshot.val()});
-                }else{
-                    alert('Sorry, there are no records on database');
-                }
-            }).catch((error) => {
-                alert(error.message);
-        });*/
-
+    test = () => {
+        <SearchScreen arr = "Kyivv"/>
+        this.props.navigation.navigate("Search");
+        console.log(this.state.arrival)
+    }
     render() {
         return (
             <View style={styles.container}>
-                <Image
+                <ImageBackground
                     style={styles.mainpicture}
-                    source={require('../img/photo2.png')}
-                />
-                <View style={styles.modal}>
-                <Entypo name="chevron-small-left" size={24} color="black" />
-                    <TextInput style ={styles.input} autoCapitalize = "none"
-                        onChangeText={arrival => this.setState({arrival})}
-                        value={this.state.arrival}
-                        placeholder='Route from ...'/>
-                <Entypo name="chevron-small-right" size={24} color="black" />
+                    source={require('../img/logoTest2.jpg')}
+                >
+                    <View style={styles.modal}>
                 <Entypo name="chevron-small-left" size={24} color="black" />
                     <TextInput style ={styles.input} autoCapitalize = "none"
                         onChangeText={depart => this.setState({depart})}
                         value={this.state.depart}
+                        placeholder='Route from ...'/>
+                <Entypo name="chevron-small-right" size={24} color="black" />
+                <Entypo name="chevron-small-left" size={24} color="black" />
+                    <TextInput style ={styles.input} autoCapitalize = "none"
+                        onChangeText={arrival => this.setState({arrival})}
+                        value={this.state.arrival}
                         placeholder='Route to ...'/>
                 <Entypo name="chevron-small-right" size={24} color="black" />
                 <TouchableOpacity style={styles.place} onPress={() => alert('Треба, щоб хтось зробив ту дату, бляха')}>
@@ -56,9 +49,10 @@ export default class HomeScreen extends React.Component {
                     <TextInput style = {styles.number}>{'1'}</TextInput>
                 </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("Search")}>
+                <TouchableOpacity style={styles.button} onPress={() => this.test()}>
                     <Text style={{color: "#fff", fontWeight: "500"}}>Search</Text>
                 </TouchableOpacity>
+                </ImageBackground>
             </View>
         );
     }
@@ -66,18 +60,19 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: "center"
+        
 
     },
     mainpicture: {
         marginTop: 0,
+        alignItems: "center",
         width: '100%',
-        height: 300,
+        height: '100%'
     },
     modal: {
         width: '80%',
         height: 200,
-        marginTop: 20,
+        marginTop: '100%',
         paddingTop: 20,
         borderRadius: 30,
         backgroundColor: '#fff',
@@ -125,8 +120,7 @@ const styles = StyleSheet.create({
     },
     number: {
         color: 'grey',
-        marginTop: 2,
-        fontSize: 18,
+        fontSize: 18
     }
 
 });
