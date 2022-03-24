@@ -1,14 +1,18 @@
 import React from 'react'
-import {View, Text, StyleSheet, Image,TouchableOpacity} from 'react-native'
-import { AntDesign } from '@expo/vector-icons'; 
+import {View, Text, StyleSheet, Image, ImageBackground, TouchableOpacity, ScrollView} from 'react-native'
 import {auth} from "../firebaseAuth";
 
 export default class ProfileScreen extends React.Component {
 
     state = {
         name: "",
+        phoneNumber: "",
+        email: "",
+        carBrand: "",
+        carColor: ""
     };
 
+    
     handleLogOut = () => {
         auth.signOut()
             .then()
@@ -21,10 +25,13 @@ export default class ProfileScreen extends React.Component {
         const user = auth.currentUser;
         if(user !== null) {
             this.state.name = user.displayName;
+            this.state.email = user.email;
         }
         return (
-            <View style={styles.container}>
-                <View style={styles.upPart}>
+            <ScrollView style={styles.container}>
+                <ImageBackground
+                style={styles.upPart}
+                source={require('../img/backProfile.jpg')}>
                     <View style={styles.avatarContainer}>
                         <Image
                             source={require("../img/no-img.jpg")}
@@ -32,74 +39,64 @@ export default class ProfileScreen extends React.Component {
                         />
                     </View>
                     <Text style={styles.name}>{this.state.name}</Text>
-                </View>
+                </ImageBackground>
                 <View style={styles.about}>
                     <Text style={styles.text}>Profile</Text>
                     <View style={styles.rows} >
                         <Text style = {styles.inputTitle}>Name</Text>
-                        <TouchableOpacity onPress={() => alert('Ше не робе')}>
-                            <AntDesign name="edit" style={styles.edit} size={24} color="black" />
-                        </TouchableOpacity>
+                        <Text style = {styles.resultTitle}>{this.state.name}</Text>
                     </View>
                     <View style={styles.rows} >
                         <Text style = {styles.inputTitle}>Phone number</Text>
-                        <TouchableOpacity onPress={() => alert('Ше не робе')}>
-                            <AntDesign name="edit" style={styles.edit} size={24} color="black" />
-                        </TouchableOpacity>
+                        <Text style = {styles.resultTitle}>{this.state.phoneNumber}</Text>
                     </View>
                     <View style={styles.rows} >
-                        <Text style = {styles.inputTitle}>Change Password</Text>
-                        <TouchableOpacity onPress={() => alert('Ше не робе')}>
-                            <AntDesign name="edit" style={styles.edit} size={24} color="black" />
-                        </TouchableOpacity>
+                        <Text style = {styles.inputTitle}>Gender</Text>
                     </View>
                     <View style={styles.rows} >
-                        <Text style = {styles.inputTitle}>Change Email</Text>
-                        <TouchableOpacity onPress={() => alert('Ше не робе')}>
-                            <AntDesign name="edit" style={styles.edit} size={24} color="black" />
-                        </TouchableOpacity>
+                        <Text style = {styles.inputTitle}>Email</Text>
+                        <Text style = {styles.resultTitle}>{this.state.email}</Text>
                     </View>
                     <Text style={styles.text}>About me</Text>
                     <View style={styles.rows} >
                         <Text style = {styles.inputTitle}>Preferences</Text>
-                        <TouchableOpacity onPress={() => alert('Ше не робе')}>
-                            <AntDesign name="edit" style={styles.edit} size={24} color="black" />
-                        </TouchableOpacity>
                     </View>
                     <Text style={styles.text}>Car information</Text>
                     <View style={styles.rows} >
                         <Text style = {styles.inputTitle}>Car brand</Text>
-                        <TouchableOpacity onPress={() => alert('Ше не робе')}>
-                            <AntDesign name="edit" style={styles.edit} size={24} color="black" />
-                        </TouchableOpacity>
+                        <Text style = {styles.resultTitle}>{this.state.carBrand}</Text>
                     </View>
                     <View style={styles.rows} >
                         <Text style = {styles.inputTitle}>Car color</Text>
-                        <TouchableOpacity onPress={() => alert('Ше не робе')}>
-                            <AntDesign name="edit" style={styles.edit} size={24} color="black" />
-                        </TouchableOpacity>
+                        <Text style = {styles.resultTitle}>{this.state.carColor}</Text>
                     </View>
                 </View>
+                <View style={styles.buttonPart}>
                 <TouchableOpacity style={styles.button} onPress={this.handleLogOut}>
                     <Text style={{color: "#fff", fontWeight: "500"}}>Log out</Text>
                 </TouchableOpacity>
-            </View>
+                <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("Edit")}>
+                    <Text style={{color: "#fff", fontWeight: "500"}}>Edit profile</Text>
+                </TouchableOpacity>
+                </View>
+            </ScrollView >
         );
     }
 }
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        flexDirection: 'column',
     },
     avatarContainer: {
-        marginTop: '18%',
+        marginTop: '15%',
         shadowColor: "#151734",
         shadowRadius: 20,
         shadowOpacity: 0.4
     },
     upPart:{
-        backgroundColor: '#2a9ed2',
-        alignItems: "center" 
+        alignItems: "center",
+        height: 270 
     },
     avatar: {
         width: 110,
@@ -110,12 +107,16 @@ const styles = StyleSheet.create({
         margin: 24,
         fontWeight: 'bold',
         color: '#e6ffff',
-        fontSize: 22
+        fontSize: 27
     },
-    
+    buttonPart: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        height: '10%'
+    },
     button: {
         margin: 2,
-        marginHorizontal: 30,
+        width: '45%',
         backgroundColor: "#2a9ed2",
         borderRadius: 4,
         height: 52,
@@ -134,12 +135,17 @@ const styles = StyleSheet.create({
     rows: {
         marginLeft: 30,
         marginRight: 30,
-        marginBottom: 20,
+        marginBottom: 15,
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
     inputTitle: {
         color: '#2a9ed2',
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
+    resultTitle: {
+        color: '#334700',
         fontSize: 18,
         fontWeight: 'bold',
     },

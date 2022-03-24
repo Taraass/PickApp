@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, Text, StyleSheet, Image, TextInput, TouchableOpacity} from 'react-native'
+import {View, Text, StyleSheet, ImageBackground, TextInput, TouchableOpacity} from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { collection, addDoc} from "firebase/firestore";
@@ -32,11 +32,11 @@ export default class PostScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Image
+                <ImageBackground
                     style={styles.mainpicture}
-                    source={require('../img/autostop.png')}
-                />
-                <View style={styles.modal}>
+                    source={require('../img/logoTestfree.jpg')}
+                >
+                    <View style={styles.modal}>
                 <AntDesign name="caretdown" size={18} color="black" />
                     <TextInput style ={styles.input} autoCapitalize = "none"
                         onChangeText={depart => this.setState({depart})}
@@ -62,7 +62,7 @@ export default class PostScreen extends React.Component {
                 <TouchableOpacity style={styles.button} onPress={() => this.storeData()}>
                     <Text style={{color: "#fff", fontWeight: "500"}}>Create a trip</Text>
                 </TouchableOpacity>
-
+                </ImageBackground>
             </View>
         );
     }
@@ -71,12 +71,15 @@ export default class PostScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: "center"
+        
     },
     mainpicture: {
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+        alignItems: "center",
         marginTop: 0,
         width: '100%',
-        height: 300,
+        height: '100%',
     },
     modal: {
         width: '80%',

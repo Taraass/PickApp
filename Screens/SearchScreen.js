@@ -1,119 +1,150 @@
 import React from 'react'
 
-import {View, Text, StyleSheet, Image, TextInput, TouchableOpacity} from 'react-native'
-import { Entypo } from '@expo/vector-icons';
-import { MaterialIcons } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
+import {View, Text, StyleSheet, Image} from 'react-native'
 import {db} from '../firebaseStorage'
 import { collection, query, where, getDocs } from "firebase/firestore";
 
 export default class SearchScreen extends React.Component {
 
     state = {
+        docId: "",
         arrival: "",
         depart: "",
-        numberOfPass: ""
+        driver: ""
     }
 
+    test = (myMap) => {
+        for(let i = 0; i < myMap.size(); i++){
+            console.log('Mappp');
+        }
+        /*return(
+            <FlatList 
+                data={myMap}
+                renderItem={({ item }) => <Text style={styles.item}>{item.arrival}</Text>}
+                keyExtractor={(item) => item.id}
+            />
+        )*/
+    }
 
-   Search = async() => {
+    componentDidMount() {
+        this.Search()
+    }
+
+    Search = async() => {
        try {
-           const q = query(collection(db, "Trip"), where("arrive", "==", "Kyiv"));
-
-           const querySnapshot = await getDocs(q);
-           querySnapshot.forEach((doc) => {
-               // doc.data() is never undefined for query doc snapshots
-               this.setState({depart:doc.data().departune})
-               this.setState({arrival:doc.data().arrive})
-           });
+            let myMap = new Map();
+            console.log('New one __________2_')
+            const q = query(collection(db, "Trip"), where("arrive", "==", "Kyiv"));
+            const querySnapshot = await getDocs(q);
+            querySnapshot.forEach((doc) => {
+                myMap.set(doc.id, doc.data())
+                // doc.data() is never undefined for query doc snapshots
+                //this.setState({depart: doc.data().departune})
+                //this.setState({arrival: doc.data().arrive})
+                //this.setState({driver: doc.data().driver})
+            });
+            console.log("Map:", myMap.get('cnh3oC8qhfpp1nREGZ8j'))
+            
        } catch (e) {
-           alert("Error adding document: ", e);
+            alert("Error adding document: ", e.message);
        }
    }
- render()
+    render()
     {
         return (
             <View style={styles.container}>
-                <Image
-                    style={styles.mainpicture}
-                    source={require('../img/photo2.png')}
-                />
                 <View style={styles.modal}>
-                    <Text>{this.state.arrival}</Text>
-                    <Text>{this.state.depart}</Text>
-                    <TouchableOpacity style={styles.button} onPress={() => this.Search()}>
-                        <Text style={{color: "#fff", fontWeight: "500"}}>Search</Text>
-                    </TouchableOpacity>
+                    <View style={styles.upPart}>
+                        <View style={styles.row}>
+                            <Text style={styles.tripInfo}>16:40</Text>
+                            <Text style={styles.tripResult}>{this.state.arrival}</Text>
+                        </View>
+                        <View style={styles.row}>
+                            <Text style={styles.tripInfo}>16:40</Text>
+                            <Text style={styles.tripResult}>{this.state.depart}</Text> 
+                        </View>
+                    </View>
+                    <View style={styles.row}>
+                        <View style={styles.avatarContainer}>
+                            <Image
+                                source={require("../img/no-img.jpg")}
+                                style={styles.avatar}
+                            />
+                        </View>
+                        <Text style={styles.name}>{this.state.driver}</Text>
+                        <Text style={styles.tripInfoPrice}>300</Text>   
+                    </View>
                 </View>
             </View>
         );
     }
-
 }
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: "center"
+        alignItems: "center",
+        marginTop: 30
 
     },
-    mainpicture: {
-        marginTop: 0,
-        width: '100%',
-        height: 300,
-    },
     modal: {
-        width: '80%',
-        height: 200,
-        marginTop: 20,
+        borderWidth: 0.6,
+        width: '90%',
+        height: 190,
+        marginTop: 30,
         paddingTop: 20,
         borderRadius: 30,
         backgroundColor: '#fff',
-        alignItems: 'center',
         flexDirection: "column",
         flexWrap: "wrap",
-        justifyContent: 'space-between'
     },
-    input: {
-        borderBottomColor: "#373f9e",
-        borderBottomWidth: StyleSheet.hairlineWidth,
-        height: 50,
-        marginLeft: 10,
-        width: '80%',
-        fontSize: 15,
-        color: "#161F3D"
-    },
-    button: {
-        width: '80%',
-        backgroundColor: "#2a9ed2",
-        margin: 20,
-        borderRadius: 20,
-        height: 52,
-        alignItems: "center",
-        justifyContent: "center"
-    },
-    textToday: {
-        color: 'grey',
-        marginTop: 6,
+    tripResult: {
+        color: '#334700',
         fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 25
     },
-    iconDate:{
-        color: 'grey',
+    row: {
+        flexDirection: 'row',
+    },
+    tripInfo: {
+        color: '#2a9ed2',
+        fontSize: 18,
+        fontWeight: 'bold',
         marginLeft: 30,
-        marginRight: 15
+        marginRight: 30,
+        marginBottom: 25
     },
-    iconPerson: {
-        color: 'grey',
-        marginLeft: '14%',
-        marginRight: 15
+    tripInfoPrice: {
+        color: '#2a9ed2',
+        fontSize: 25,
+        fontWeight: 'bold',
+        marginTop: 21,
+        marginLeft: '30%',
+        marginRight: 30,
     },
-    place: {
-        marginTop: 40,
-        flexDirection: "row",
+    upPart: {
+        width: '100%',
+        borderBottomWidth: 1,
+        borderBottomColor: '#F0F8FF'
     },
-    number: {
-        color: 'grey',
-        marginTop: 2,
+    avatarContainer: {
+        marginLeft: 30,
+        marginTop: 10,
+        shadowColor: "#151734",
+        shadowRadius: 20,
+        shadowOpacity: 0.4
+    },
+    avatar: {
+        width: 50,
+        height: 50,
+        borderRadius: 68
+    },
+    name: {
+        color: '#2a9ed2',
         fontSize: 18,
-    }
-
+        fontWeight: 'bold',
+        marginTop: 25,
+        marginLeft: 30,
+        marginRight: 30,
+    },
 });
