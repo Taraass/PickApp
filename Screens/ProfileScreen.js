@@ -1,63 +1,98 @@
-import React from 'react'
-import {View, Text, StyleSheet, Image, ImageBackground, TouchableOpacity, ScrollView} from 'react-native'
+import React, {useEffect, useState} from 'react'
+import {View, Text,Button, StyleSheet, Image, ImageBackground, TouchableOpacity, ScrollView, Platform} from 'react-native'
 import {auth} from "../firebaseAuth";
+import { useFocusEffect } from "@react-navigation/native";
+import {db} from '../firebaseStorage'
+import { doc, getDoc } from "firebase/firestore";
 import {launchImageLibrary} from "react-native-image-picker";
 import * as ImagePicker from 'expo-image-picker';
 
-export default class ProfileScreen extends React.Component {
+export default function ProfileScreen({ navigation: { navigate }})  {
 
-    state = {
-        name: "",
-        phoneNumber: "",
-        email: "",
-        carBrand: "",
-        carColor: ""
-    };
+    const [image, setImage] = useState("");
+    const [name, setName] = useState("")
+    const [phoneNumber, setPhoneNumber] = useState('')
+    const [gender, setGender] = useState('')
+    const [carBrand, setCarBrand] = useState('')
+    const [carColor, setCarColor] = useState('')
+    const [email,setEmail] = useState('')
+    const [imageExists, setImageExists] = useState(false)
 
-    
-    handleLogOut = () => {
+    useFocusEffect(
+        React.useCallback(() => {
+                const user = auth.currentUser;
+                setEmail(user.email);
+                const fetchData = async() => {
+                    try {
+                        if (user !== null) {
+                            const docRef = doc(db, "User", user.uid);
+                            const docSnap = await getDoc(docRef);
+                            if (docSnap.exists()) {
+                                console.log("Document data:", docSnap.data());
+                                setName((docSnap.data().name));
+                                setPhoneNumber((docSnap.data().phoneNumber));
+                                setGender((docSnap.data().gender));
+                                setCarBrand((docSnap.data().carBrand));
+                                setCarColor((docSnap.data().carColor));
+                                setImage(user.photoURL);
+                                setImageExists(true)
+                            } else {
+                                console.log("No such document!");
+                            }
+                        } else {
+                            console.log('Bye')
+                        }
+                    } catch (e) {
+                        console.log(e);
+                    }
+                };
+
+                fetchData().then();
+        }, [])
+    )
+
+    const handleLogOut = () => {
         auth.signOut()
             .then()
             .catch((error) => {
                 alert(error.message);
             })
     };
-
-    render() {
-        const user = auth.currentUser;
-        if(user !== null) {
-            this.state.name = user.displayName;
-            this.state.email = user.email;
-        }
         return (
             <ScrollView style={styles.container}>
                 <ImageBackground
                 style={styles.upPart}
                 source={require('../img/backProfile.jpg')}>
                     <View style={styles.avatarContainer}>
-                        <Image
-                            source={this.state.image}
-                            style={styles.avatar}
-                        />
+                        { !imageExists ?
+                            <Image
+                                source={require('../img/no-img.jpg')}
+                                style={styles.avatar}
+                            />
+                            :
+                            <Image source={{ uri: image }} style={styles.avatar} />
+                        }
+
                     </View>
-                    <Text style={styles.name}>{this.state.name}</Text>
+                    <Text style={styles.name}>{name}</Text>
                 </ImageBackground>
                 <View style={styles.about}>
                     <Text style={styles.text}>Profile</Text>
                     <View style={styles.rows} >
                         <Text style = {styles.inputTitle}>Name</Text>
-                        <Text style = {styles.resultTitle}>{this.state.name}</Text>
+                        <Text style = {styles.resultTitle}>{name}</Text>
                     </View>
                     <View style={styles.rows} >
                         <Text style = {styles.inputTitle}>Phone number</Text>
-                        <Text style = {styles.resultTitle}>{this.state.phoneNumber}</Text>
+                        <Text style = {styles.resultTitle}>{phoneNumber}</Text>
                     </View>
                     <View style={styles.rows} >
                         <Text style = {styles.inputTitle}>Gender</Text>
+                        <Text style = {styles.resultTitle}>{gender}</Text>
                     </View>
                     <View style={styles.rows} >
                         <Text style = {styles.inputTitle}>Email</Text>
-                        <Text style = {styles.resultTitle}>{this.state.email}</Text>
+                        <Text style = {styles.resultTitle}>{email}</Text>
                     </View>
                     <Text style={styles.text}>About me</Text>
                     <View style={styles.rows} >
@@ -66,24 +101,24 @@ export default class ProfileScreen extends React.Component {
                     <Text style={styles.text}>Car information</Text>
                     <View style={styles.rows} >
                         <Text style = {styles.inputTitle}>Car brand</Text>
-                        <Text style = {styles.resultTitle}>{this.state.carBrand}</Text>
+                        <Text style = {styles.resultTitle}>{carBrand}</Text>
                     </View>
                     <View style={styles.rows} >
                         <Text style = {styles.inputTitle}>Car color</Text>
-                        <Text style = {styles.resultTitle}>{this.state.carColor}</Text>
+                        <Text style = {styles.resultTitle}>{carColor}</Text>
                     </View>
                 </View>
                 <View style={styles.buttonPart}>
-                <TouchableOpacity style={styles.button} onPress={this.handleLogOut}>
+                <TouchableOpacity style={styles.button} onPress={() => handleLogOut()}>
                     <Text style={{color: "#fff", fontWeight: "500"}}>Log out</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("Edit")}>
+                <TouchableOpacity style={styles.button} onPress={() => navigate("Edit")}>
                     <Text style={{color: "#fff", fontWeight: "500"}}>Edit profile</Text>
                 </TouchableOpacity>
                 </View>
             </ScrollView >
         );
-    }
+
 }
 const styles = StyleSheet.create({
     container: {
