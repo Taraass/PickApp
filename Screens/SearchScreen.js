@@ -34,11 +34,11 @@ export default function SearchScreen() {
                         <View style={styles.upPart}>
                             <View style={styles.row}>
                                 <Text style={styles.tripInfo}>16:40</Text>
-                                <Text style={styles.tripResult}>{k.arrive}</Text>
+                                <Text style={styles.tripResult}>{k.departune}</Text>
                             </View>
                             <View style={styles.row}>
                                 <Text style={styles.tripInfo}>16:40</Text>
-                                <Text style={styles.tripResult}>{k.departune}</Text>
+                                <Text style={styles.tripResult}>{k.arrive}</Text>
                             </View>
                         </View>
                         <View style={styles.row}>
