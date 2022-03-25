@@ -1,33 +1,35 @@
-import React, {useState} from 'react'
-import {View, StyleSheet} from 'react-native'
+import React, {useEffect, useState} from 'react'
+import {View, StyleSheet, Text, Image} from 'react-native'
 import { db } from '../firebaseStorage'
 import { collection, query, where, getDocs } from "firebase/firestore";
+import {useFocusEffect} from "@react-navigation/native";
 
 
 export default function SearchScreen() {
 
-    search = async() => {
-        try {
-            const q = query(collection(db, "Trip"), where("arrive", "==", "Kyiv"));
-            const querySnapshot = await getDocs(q);
-            querySnapshot.forEach((doc) => {
-                const k = {
-                    docId: doc.id,
-                    ...doc.data()
-                }
-                datas.push(k);
-                return datas;
-            });
-        } catch (e) {
-            alert("Error adding document: ", e.message);
-        }
-    }
-    console.log(datas);
+    let data = []
 
-    return (
+        useEffect(async() => {
+            try {
+                const q = query(collection(db, "Trip"), where("arrive", "==", "Kyiv"));
+                const querySnapshot = await getDocs(q);
+                querySnapshot.forEach((doc) => {
+                    const k = {
+                        docId: doc.id,
+                        ...doc.data()
+                    }
+                    data.push(k);
+                });
+            } catch (e) {
+                alert("Error adding document: ", e.message);
+            }
+        }
+    )
+
+        return (
         <View style={styles.container}>
-            {datas.map((k)=>{
-                return(
+            {data.map((k)=>{
+                    return (
                     <View style={styles.modal}>
                         <View style={styles.upPart}>
                             <View style={styles.row}>
@@ -36,7 +38,7 @@ export default function SearchScreen() {
                             </View>
                             <View style={styles.row}>
                                 <Text style={styles.tripInfo}>16:40</Text>
-                                <Text style={styles.tripResult}>{k.departune}</Text> 
+                                <Text style={styles.tripResult}>{k.departune}</Text>
                             </View>
                         </View>
                         <View style={styles.row}>
@@ -46,21 +48,31 @@ export default function SearchScreen() {
                                     style={styles.avatar}
                                 />
                             </View>
-                            <Text style={styles.name}>{k.driver}</Text>
-                            <Text style={styles.tripInfoPrice}>300</Text>   
+                            <Text style={styles.name}>{"k.driver"}</Text>
+                            <Text style={styles.tripInfoPrice}>300</Text>
                         </View>
                     </View>
-                )
-            })}
-        </View>
+                    )}
+                )}
+            </View>
+
     );
 }
 
 const styles = StyleSheet.create({
+    fuck:{
+      backgroundColor: 'blue',
+        width: '100%',
+        height: '100%'
+    },
+    fuck1:{
+        backgroundColor: 'yellow',
+        width: '100%',
+        height: '100%'
+    },
     container: {
         flex: 1,
         alignItems: "center",
-        backgroundColor: 'red',
         marginTop: 30,
 
     },
