@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from 'react'
-import {View, Text,Button, StyleSheet, Image, ImageBackground, TouchableOpacity, ScrollView, Platform} from 'react-native'
+import React, {useState} from 'react'
+import {View, Text, StyleSheet, Image, ImageBackground, TouchableOpacity, ScrollView, Platform} from 'react-native'
 import {auth} from "../firebaseAuth";
 import { useFocusEffect } from "@react-navigation/native";
 import {db} from '../firebaseStorage'
 import { doc, getDoc } from "firebase/firestore";
-import {launchImageLibrary} from "react-native-image-picker";
-import * as ImagePicker from 'expo-image-picker';
+
 
 export default function ProfileScreen({ navigation: { navigate }})  {
 
@@ -133,7 +132,7 @@ const styles = StyleSheet.create({
     },
     upPart:{
         alignItems: "center",
-        height: 270 
+        height: 270
     },
     avatar: {
         width: 110,

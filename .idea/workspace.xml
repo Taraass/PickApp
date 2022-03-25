@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d022d181-165f-48c3-a6e1-2dd4d6fae5f9" name="Changes" comment="Add photoavatarrr">
-      <change afterPath="$PROJECT_DIR$/img/imgno.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/noimg.png" afterDir="false" />
+    <list default="true" id="d022d181-165f-48c3-a6e1-2dd4d6fae5f9" name="Changes" comment="Add photoall">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Screens/EditScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/Screens/EditScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Async/SearchAsync.js" beforeDir="false" afterPath="$PROJECT_DIR$/Async/SearchAsync.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Screens/ProfileScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/Screens/ProfileScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Screens/SearchScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/Screens/SearchScreen.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648160290631</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Add photoall">
+      <created>1648213086908</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1648213086908</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -153,13 +159,28 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="tarasmaster" />
+                        <option value="origin/master" />
                       </list>
                     </value>
                   </entry>
                 </map>
               </option>
             </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/master" />
+                </option>
+              </RecentGroup>
+            </list>
           </value>
         </entry>
       </map>
@@ -171,6 +192,7 @@
     <MESSAGE value="Adding Login and Register page" />
     <MESSAGE value="Add searchscreen" />
     <MESSAGE value="Add photoavatarrr" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add photoavatarrr" />
+    <MESSAGE value="Add photoall" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add photoall" />
   </component>
 </project>
