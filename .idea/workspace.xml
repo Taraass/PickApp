@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d022d181-165f-48c3-a6e1-2dd4d6fae5f9" name="Changes" comment="Add searchscreen">
+    <list default="true" id="d022d181-165f-48c3-a6e1-2dd4d6fae5f9" name="Changes" comment="Add photoavatarrr">
+      <change afterPath="$PROJECT_DIR$/img/imgno.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/noimg.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Screens/EditScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/Screens/EditScreen.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Screens/ProfileScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/Screens/ProfileScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Screens/SearchScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/Screens/SearchScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +63,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\lukas\WebstormProjects\PickApp\img" />
       <recent name="C:\Users\taras\WebstormProjects\PickApp\img" />
     </key>
   </component>
@@ -129,7 +129,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648037670219</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Add photoavatarrr">
+      <created>1648160290631</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1648160290631</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -163,6 +170,7 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Adding Login and Register page" />
     <MESSAGE value="Add searchscreen" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add searchscreen" />
+    <MESSAGE value="Add photoavatarrr" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add photoavatarrr" />
   </component>
 </project>

@@ -7,13 +7,14 @@ import { auth } from '../firebaseAuth';
 import * as ImagePicker from 'expo-image-picker';
 
 
-export default function  EditScreen (){
+export default function  EditScreen ({ navigation: { navigate }}){
     const [image, setImage] = useState(null);
-    const [name, setName] = useState("")
+    const [name, setName] = useState('')
     const [phoneNumber, setPhoneNumber] = useState('')
     const [gender, setGender] = useState('')
     const [carBrand, setCarBrand] = useState('')
     const [carColor, setCarColor] = useState('')
+    const [imageExists, setImageExists] = useState(false)
 
 
     useEffect(() => {
@@ -31,69 +32,69 @@ export default function  EditScreen (){
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
-            aspect: [4, 3],
+            aspect: [4, 4],
             quality: 1,
         });
 
         console.log(result);
 
         if (!result.cancelled) {
+            setImageExists(true)
             setImage(result.uri);
+
         }
     };
 
-
-
-    /*state = {
-        userid: "",
-        name: "",
-        phoneNumber: "",
-        gender: "",
-        carBrand: "",
-        carColor: "",
-    };
-
     test = () => {
-        updateProfile(auth.currentUser, {displayName: this.state.name})
-        .then(()=>{
-            console.log('Імя змінено')
-        }).catch((error)=> {
-            console.log(error.message)
-        })
+        if(typeof(image) == 'string') {
+            updateProfile(auth.currentUser, {displayName: name, photoURL: image})
+                .then(() => {
+                    console.log('Імя змінено')
+                }).catch((error) => {
+                console.log(error.message)
+            })
+        } else {
+            console.log('Fuck that shit')
+        }
     }
-    storeData = async() => {
+    const storeData = async() => {
         try {
-            console.log('   ')
-            this.test();
-            const user = auth.currentUser;
-            this.state.userid = user.uid;
-            console.log('User id:', this.state.userid);
-            await setDoc(doc(db, "User", this.state.userid), {
-                name: this.state.name,
-                phoneNumber: this.state.phoneNumber,
-                gender: this.state.gender,
-                carBrand: this.state.carBrand,
-                carColor: this.state.carColor
-            });
-            console.log("Запис в бд створено")
-            alert('Дані відредаговані')
-            this.props.navigation.navigate('Home');
+            if(name !== '') {
+                test();
+                const user = auth.currentUser;
+                await setDoc(doc(db, "User", user.uid), {
+                    name: name,
+                    phoneNumber: phoneNumber,
+                    gender: gender,
+                    carBrand: carBrand,
+                    carColor: carColor
+                });
+                console.log("Запис в бд створено")
+                alert('Дані відредаговані')
+                navigate('Profile');
+                } else {
+                alert('Заповни імя')
+            }
         } catch (e) {
             console.log(e.message)
         }
     }
-*/
+
 
         return (
             <ScrollView style={styles.container}>
                 <ImageBackground
                     source={require('../img/backProfile.jpg')}
                     style={styles.upPart}>
-                        <View style={styles.avatarContainer}>
-                            {image && <Image source={{ uri: image }} style={styles.avatar} />}
-                            <Button title="Pick an image from camera roll" onPress={pickImage} />
-                        </View>
-                    <Text style={styles.name}>{"Bodialok"}</Text>
+                    <View style={styles.avatarContainer}>
+                        { !imageExists ?
+                        <TouchableOpacity onPress={()=> pickImage()}>
+                            <Image source={require('../img/imgno.jpg')} style={styles.avatar}/>
+                        </TouchableOpacity>
+                        :
+                        <Image source={{ uri: image }} style={styles.avatar} />
+                        }
+                    </View>
                 </ImageBackground>
                 <View style={styles.about}>
                     <Text style={styles.text}>Profile</Text>
@@ -134,7 +135,7 @@ export default function  EditScreen (){
                             value={carColor}/>
                     </View>
                 </View>
-                <TouchableOpacity style={styles.button} onPress={() => this.storeData()}>
+                <TouchableOpacity style={styles.button} onPress={() => storeData()}>
                     <Text style={{color: "#fff", fontWeight: "500"}}>Save</Text>
                 </TouchableOpacity>
             </ScrollView>
@@ -145,19 +146,20 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     avatarContainer: {
-        marginTop: '18%',
+        marginTop: '25%',
         shadowColor: "#151734",
         shadowRadius: 20,
-        shadowOpacity: 0.4
+        shadowOpacity: 0.4,
     },
     upPart:{
         alignItems: "center",
         height: 270
     },
     avatar: {
-        width: 110,
-        height: 110,
-        borderRadius: 68
+        width: 130,
+        height: 130,
+        borderRadius: 68,
+        backgroundColor: '#fff'
     },
     name: {
         margin: 24,
