@@ -1,90 +1,67 @@
-import React from 'react'
-
-import {View, Text, StyleSheet, Image} from 'react-native'
-import {db} from '../firebaseStorage'
+import React, {useState} from 'react'
+import {View, StyleSheet} from 'react-native'
+import { db } from '../firebaseStorage'
 import { collection, query, where, getDocs } from "firebase/firestore";
 
-export default class SearchScreen extends React.Component {
 
-    state = {
-        docId: "",
-        arrival: "",
-        depart: "",
-        driver: ""
-    }
+export default function SearchScreen() {
 
-    test = (myMap) => {
-        for(let i = 0; i < myMap.size(); i++){
-            console.log('Mappp');
-        }
-        /*return(
-            <FlatList
-                data={myMap}
-                renderItem={({ item }) => <Text style={styles.item}>{item.arrival}</Text>}
-                keyExtractor={(item) => item.id}
-            />
-        )*/
-    }
-
-    componentDidMount() {
-        this.Search()
-    }
-
-    Search = async() => {
-       try {
-            let myMap = new Map();
-            console.log('New one __________2_')
+    search = async() => {
+        try {
             const q = query(collection(db, "Trip"), where("arrive", "==", "Kyiv"));
             const querySnapshot = await getDocs(q);
             querySnapshot.forEach((doc) => {
-                myMap.set(doc.id, doc.data())
-
-                // doc.data() is never undefined for query doc snapshots
-                //this.setState({depart: doc.data().departune})
-                //this.setState({arrival: doc.data().arrive})
-                //this.setState({driver: doc.data().driver})
+                const k = {
+                    docId: doc.id,
+                    ...doc.data()
+                }
+                datas.push(k);
+                return datas;
             });
-            console.log("Map:", myMap.get('cnh3oC8qhfpp1nREGZ8j'))
-
-       } catch (e) {
+        } catch (e) {
             alert("Error adding document: ", e.message);
-       }
-   }
-    render()
-    {
-        return (
-            <View style={styles.container}>
-                <View style={styles.modal}>
-                    <View style={styles.upPart}>
-                        <View style={styles.row}>
-                            <Text style={styles.tripInfo}>16:40</Text>
-                            <Text style={styles.tripResult}>{this.state.arrival}</Text>
-                        </View>
-                        <View style={styles.row}>
-                            <Text style={styles.tripInfo}>16:40</Text>
-                            <Text style={styles.tripResult}>{this.state.depart}</Text>
-                        </View>
-                    </View>
-                    <View style={styles.row}>
-                        <View style={styles.avatarContainer}>
-                            <Image
-                                source={require("../img/no-img.jpg")}
-                                style={styles.avatar}
-                            />
-                        </View>
-                        <Text style={styles.name}>{this.state.driver}</Text>
-                        <Text style={styles.tripInfoPrice}>300</Text>
-                    </View>
-                </View>
-            </View>
-        );
+        }
     }
+    console.log(datas);
+
+    return (
+        <View style={styles.container}>
+            {datas.map((k)=>{
+                return(
+                    <View style={styles.modal}>
+                        <View style={styles.upPart}>
+                            <View style={styles.row}>
+                                <Text style={styles.tripInfo}>16:40</Text>
+                                <Text style={styles.tripResult}>{k.arrive}</Text>
+                            </View>
+                            <View style={styles.row}>
+                                <Text style={styles.tripInfo}>16:40</Text>
+                                <Text style={styles.tripResult}>{k.departune}</Text> 
+                            </View>
+                        </View>
+                        <View style={styles.row}>
+                            <View style={styles.avatarContainer}>
+                                <Image
+                                    source={require("../img/no-img.jpg")}
+                                    style={styles.avatar}
+                                />
+                            </View>
+                            <Text style={styles.name}>{k.driver}</Text>
+                            <Text style={styles.tripInfoPrice}>300</Text>   
+                        </View>
+                    </View>
+                )
+            })}
+        </View>
+    );
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: "center",
-        marginTop: 30
+        backgroundColor: 'red',
+        marginTop: 30,
 
     },
     modal: {

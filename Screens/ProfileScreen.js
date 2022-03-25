@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     },
     upPart:{
         alignItems: "center",
-        height: 270
+        height: 270 
     },
     avatar: {
         width: 110,
