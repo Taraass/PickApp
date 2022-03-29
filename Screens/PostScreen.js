@@ -11,17 +11,20 @@ export default class PostScreen extends React.Component {
     state = {
         arrival: "",
         depart: "",
-        driverName: ""
+        driverName: "",
+        userId: ""
     }
 
     storeData = async() => {
         try {
             const user = auth.currentUser;
+            this.state.userId = user.uid;
             this.state.driverName = user.displayName;
             await addDoc(collection(db, "Trip"), {
               arrive: this.state.arrival,
               departune: this.state.depart,
-              driver: this.state.driverName
+              driver: this.state.driverName,
+              userId: this.state.userId
             });
             alert("Поїздку додано!");
         } catch (e) {

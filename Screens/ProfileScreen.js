@@ -1,10 +1,9 @@
-import React, {useState} from 'react'
-import {View, Text, StyleSheet, Image, ImageBackground, TouchableOpacity, ScrollView, Platform} from 'react-native'
+import React, { useState} from 'react'
+import {View, Text, StyleSheet, Image, ImageBackground, TouchableOpacity, ScrollView} from 'react-native'
 import {auth} from "../firebaseAuth";
 import { useFocusEffect } from "@react-navigation/native";
 import {db} from '../firebaseStorage'
 import { doc, getDoc } from "firebase/firestore";
-
 
 export default function ProfileScreen({ navigation: { navigate }})  {
 

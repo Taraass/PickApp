@@ -1,34 +1,44 @@
-import React, {useEffect, useState} from 'react'
-import {View, StyleSheet, Text, Image} from 'react-native'
+import React, {useEffect, useState } from 'react'
+import {View, StyleSheet, Text, Image,ScrollView} from 'react-native'
 import { db } from '../firebaseStorage'
 import { collection, query, where, getDocs } from "firebase/firestore";
-import {useFocusEffect} from "@react-navigation/native";
 
+const SearchScreen = ({route}) => {
 
-export default function SearchScreen() {
+    const { depart } = route.params;
+    const { arr } = route.params;
+    const [data, setData] = useState([]);
+    let w = []; 
 
-    let data = []
-
-        useEffect(async() => {
+        const getData = async() => {
             try {
-                const q = query(collection(db, "Trip"), where("arrive", "==", "Kyiv"));
+                const q = query(collection(db, "Trip"), where("departune", "==", depart.toString()), where("arrive", "==", arr.toString()));
                 const querySnapshot = await getDocs(q);
                 querySnapshot.forEach((doc) => {
                     const k = {
-                        docId: doc.id,
                         ...doc.data()
                     }
-                    data.push(k);
+                    w.push(k);
                 });
+                if(w.length === 0 ) {
+                    alert('There are no such trips:( Please, try to find another!');
+                }
+                console.log(w);
             } catch (e) {
-                alert("Error adding document: ", e.message);
+                alert("Error adding document ",e);
             }
         }
-    )
 
+        useEffect(async() => {
+            getData().then(() => {
+                setData(w);
+            })
+        },[]);
+    
         return (
-        <View style={styles.container}>
-            {data.map((k)=>{
+        <ScrollView>
+            <View style={styles.container}>
+                {data.map((k)=>{
                     return (
                     <View style={styles.modal}>
                         <View style={styles.upPart}>
@@ -42,20 +52,17 @@ export default function SearchScreen() {
                             </View>
                         </View>
                         <View style={styles.row}>
-                            <View style={styles.avatarContainer}>
-                                <Image
-                                    source={require("../img/no-img.jpg")}
-                                    style={styles.avatar}
-                                />
-                            </View>
-                            <Text style={styles.name}>{"k.driver"}</Text>
+                        <View style={styles.avatarContainer}>
+                            <Image source={require('../img/no-img.jpg')} style={styles.avatar} />
+                        </View>
+                            <Text style={styles.name}>{k.driver}</Text>
                             <Text style={styles.tripInfoPrice}>300</Text>
                         </View>
                     </View>
                     )}
                 )}
             </View>
-
+        </ScrollView>
     );
 }
 
@@ -138,3 +145,5 @@ const styles = StyleSheet.create({
         marginRight: 30,
     },
 });
+
+export default SearchScreen;

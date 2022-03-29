@@ -1,9 +1,10 @@
 import React , { useState, useEffect }from 'react'
-import {View,Platform, Text,TextInput, StyleSheet, Image,ImageBackground,ScrollView,Button,TouchableOpacity} from 'react-native'
+import {View, Platform, Text,TextInput, StyleSheet, Image, ImageBackground, ScrollView, TouchableOpacity} from 'react-native'
 import { updateProfile  } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import {db} from '../firebaseStorage'
 import { auth } from '../firebaseAuth';
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 import * as ImagePicker from 'expo-image-picker';
 
 
@@ -15,6 +16,8 @@ export default function  EditScreen ({ navigation: { navigate }}){
     const [carBrand, setCarBrand] = useState('')
     const [carColor, setCarColor] = useState('')
     const [imageExists, setImageExists] = useState(false)
+
+    const storage = getStorage();
 
 
     useEffect(() => {
@@ -39,12 +42,18 @@ export default function  EditScreen ({ navigation: { navigate }}){
         console.log(result);
 
         if (!result.cancelled) {
-            setImageExists(true)
-            setImage(result.uri);
-
+            setImageExists(true);
+            setImage(result.uri)
         }
     };
 
+    /*uploadImage = async (uri, imageName) => {
+        const response = await fetch(uri);
+        const blob = response.blob();
+    
+        const ref = firebase.storage().ref().child(`images/${imageName}`);
+        return ref.put(blob);
+    }*/
     test = () => {
         if(typeof(image) == 'string') {
             updateProfile(auth.currentUser, {displayName: name, photoURL: image})
@@ -67,8 +76,14 @@ export default function  EditScreen ({ navigation: { navigate }}){
                     phoneNumber: phoneNumber,
                     gender: gender,
                     carBrand: carBrand,
-                    carColor: carColor
+                    carColor: carColor,
                 });
+                /*const response = await fetch(image);
+                const blob = response.blob();
+                const storageRef = ref(storage, str);
+                uploadBytes(storageRef, blob).then((snapshot) => {
+                    console.log('Uploaded a blob or file!');
+                  });*/
                 console.log("Запис в бд створено")
                 alert('Дані відредаговані')
                 navigate('Profile');

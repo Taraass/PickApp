@@ -4,15 +4,14 @@ import {View, Text, StyleSheet, ImageBackground, TextInput,Button, TouchableOpac
 import { Entypo } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-import SearchScreen from './SearchScreen';
 import DatePicker from 'react-native-datepicker'
 
 
 export default function HomeScreen({ navigation: { navigate } }) {
 
     const [departune, setDepartune] = useState("")
-    const [arrival, setArrival] = useState('')
-    const [numberOfPass, setNumberOfPass] = useState('')
+    const [arrival, setArrival] = useState("")
+    const [numberOfPass, setNumberOfPass] = useState("")
 
     const [date, setDate] = useState(new Date())
     return (
@@ -65,7 +64,7 @@ export default function HomeScreen({ navigation: { navigate } }) {
                         <TextInput style = {styles.number}>{'1'}</TextInput>
                     </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={styles.button} onPress={() => navigate("Search")}>
+                <TouchableOpacity style={styles.button} onPress={() => navigate("Search", {depart: departune, arr: arrival})}>
                     <Text style={{color: "#fff", fontWeight: "500"}}>Search</Text>
                 </TouchableOpacity>
             </ImageBackground>
