@@ -4,14 +4,13 @@ import {View, Text, StyleSheet, ImageBackground, TextInput, TouchableOpacity} fr
 import { Entypo } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-import SearchScreen from './SearchScreen';
 
 
 export default function HomeScreen({ navigation: { navigate } }) {
 
     const [departune, setDepartune] = useState("")
-    const [arrival, setArrival] = useState('')
-    const [numberOfPass, setNumberOfPass] = useState('')
+    const [arrival, setArrival] = useState("")
+    const [numberOfPass, setNumberOfPass] = useState("")
 
         return (
             <View style={styles.container}>
@@ -41,11 +40,10 @@ export default function HomeScreen({ navigation: { navigate } }) {
                     <TextInput style = {styles.number}>{'1'}</TextInput>
                 </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={styles.button} onPress={() => navigate("Search")}>
+                <TouchableOpacity style={styles.button} onPress={() => navigate("Search", {depart: departune, arr: arrival})}>
                     <Text style={{color: "#fff", fontWeight: "500"}}>Search</Text>
                 </TouchableOpacity>
                 </ImageBackground>
-                <SearchScreen/>
             </View>
         );
 }
