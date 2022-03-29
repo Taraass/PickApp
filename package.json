@@ -27,6 +27,7 @@
     "react-native": "0.64.3",
     "react-native-awesome-alerts": "^1.5.2",
     "react-native-calendar-picker": "^7.1.2",
+    "react-native-calendars": "^1.1280.0",
     "react-native-date-picker": "^4.2.0",
     "react-native-elements": "^3.4.2",
     "react-native-image-picker": "^3.3.2",
@@ -38,7 +39,8 @@
     "react-navigation-tabs": "^2.11.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "react-native-datepicker": "^1.7.2"
   },
   "private": true
 }
