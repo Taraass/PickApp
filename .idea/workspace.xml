@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d022d181-165f-48c3-a6e1-2dd4d6fae5f9" name="Changes" comment="Add photoall">
+    <list default="true" id="d022d181-165f-48c3-a6e1-2dd4d6fae5f9" name="Changes" comment="Searchasync remote">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Async/SearchAsync.js" beforeDir="false" afterPath="$PROJECT_DIR$/Async/SearchAsync.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Screens/ProfileScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/Screens/ProfileScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Screens/HomeScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/Screens/HomeScreen.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Screens/SearchScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/Screens/SearchScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,7 +143,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648213086908</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Searchasync remote">
+      <created>1648220243422</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1648220243422</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -193,6 +201,7 @@
     <MESSAGE value="Add searchscreen" />
     <MESSAGE value="Add photoavatarrr" />
     <MESSAGE value="Add photoall" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add photoall" />
+    <MESSAGE value="Searchasync remote" />
+    <option name="LAST_COMMIT_MESSAGE" value="Searchasync remote" />
   </component>
 </project>

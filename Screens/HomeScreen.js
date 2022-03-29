@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState,Component } from 'react'
 
-import {View, Text, StyleSheet, ImageBackground, TextInput, TouchableOpacity} from 'react-native'
+import {View, Text, StyleSheet, ImageBackground, TextInput,Button, TouchableOpacity} from 'react-native'
 import { Entypo } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+import DatePicker from 'react-native-datepicker'
 
 
 export default function HomeScreen({ navigation: { navigate } }) {
@@ -12,46 +13,81 @@ export default function HomeScreen({ navigation: { navigate } }) {
     const [arrival, setArrival] = useState("")
     const [numberOfPass, setNumberOfPass] = useState("")
 
-        return (
-            <View style={styles.container}>
-                <ImageBackground
-                    style={styles.mainpicture}
-                    source={require('../img/logoTest2.jpg')}
-                >
-                    <View style={styles.modal}>
-                <Entypo name="chevron-small-left" size={24} color="black" />
+    const [date, setDate] = useState(new Date())
+    return (
+        <View style={styles.container}>
+            <ImageBackground
+                style={styles.mainpicture}
+                source={require('../img/logoTest2.jpg')}
+            >
+                <View style={styles.modal}>
+                    <Entypo name="chevron-small-left" size={24} color="black" />
                     <TextInput style ={styles.input} autoCapitalize = "none"
-                        onChangeText={departune => setDepartune(departune)}
-                        value={departune}
-                        placeholder='Route from ...'/>
-                <Entypo name="chevron-small-right" size={24} color="black" />
-                <Entypo name="chevron-small-left" size={24} color="black" />
+                               onChangeText={departune => setDepartune(departune)}
+                               value={departune}
+                               placeholder='Route from ...'/>
+                    <Entypo name="chevron-small-right" size={24} color="black" />
+                    <Entypo name="chevron-small-left" size={24} color="black" />
                     <TextInput style ={styles.input} autoCapitalize = "none"
-                        onChangeText={arrival => setArrival(arrival)}
-                        value={arrival}
-                        placeholder='Route to ...'/>
-                <Entypo name="chevron-small-right" size={24} color="black" />
-                <TouchableOpacity style={styles.place} onPress={() => alert('Треба, щоб хтось зробив ту дату, бляха')}>
-                    <MaterialIcons name="date-range" style={styles.iconDate} size={30} color="black" />
-                    <Text style = {styles.textToday}>{'Today'}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.place} onPress={() => setNumberOfPass(numberOfPass)}>
-                    <Ionicons name="person" style={styles.iconPerson} size={24} color="black" />
-                    <TextInput style = {styles.number}>{'1'}</TextInput>
-                </TouchableOpacity>
+                               onChangeText={arrival => setArrival(arrival)}
+                               value={arrival}
+                               placeholder='Route to ...'/>
+                    <Entypo name="chevron-small-right" size={24} color="black" />
+                    <DatePicker
+                        style={styles.datePickerStyle}
+                        date={date} //initial date from state
+                        mode="date" //The enum of date, datetime and time
+                        placeholder="select date"
+                        format="DD-MM-YYYY"
+                        maxDate="31-12-2022"
+                        minDate={new Date()}
+                        confirmBtnText="Confirm"
+                        cancelBtnText="Cancel"
+                        customStyles={{
+                            dateIcon: {
+                                //display: 'none',
+                                position: 'absolute',
+                                left: 0,
+                                top: 4,
+                                marginLeft: 0,
+                            },
+                            dateInput: {
+                                marginLeft: 36,
+                            },
+                        }}
+                        onDateChange={(date) => {
+                            setDate(date);
+                        }}
+                    />
+                    <TouchableOpacity style={styles.place} onPress={() => setNumberOfPass(numberOfPass)}>
+                        <Ionicons name="person" style={styles.iconPerson} size={24} color="black" />
+                        <TextInput style = {styles.number}>{'1'}</TextInput>
+                    </TouchableOpacity>
                 </View>
                 <TouchableOpacity style={styles.button} onPress={() => navigate("Search", {depart: departune, arr: arrival})}>
                     <Text style={{color: "#fff", fontWeight: "500"}}>Search</Text>
                 </TouchableOpacity>
-                </ImageBackground>
-            </View>
+            </ImageBackground>
+        </View>
         );
 }
 const styles = StyleSheet.create({
+    shit:{
+        marginTop: 20,
+        width: 200,
+        height:200,
+        color: 'red'
+    },
+    datePickerStyle: {
+        width: 150,
+        marginTop: 20,
+        marginLeft: 20
+    },
     container: {
         flex: 1,
-        
-
+    },
+    datePicker: {
+        height:300,
     },
     mainpicture: {
         marginTop: 0,
