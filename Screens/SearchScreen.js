@@ -7,12 +7,18 @@ const SearchScreen = ({route}) => {
 
     const { depart } = route.params;
     const { arr } = route.params;
+    const { month } = route.params;
+    const { day } = route.params;
     const [data, setData] = useState([]);
     let w = []; 
 
         const getData = async() => {
             try {
-                const q = query(collection(db, "Trip"), where("departune", "==", depart.toString()), where("arrive", "==", arr.toString()));
+                const q = query(collection(db, "Trip"),
+                where("departune", "==", depart.toString()),
+                where("arrive", "==", arr.toString()),
+                where("month", "==", month.toString()),
+                where("day", "==", day.toString()));
                 const querySnapshot = await getDocs(q);
                 querySnapshot.forEach((doc) => {
                     const k = {
@@ -56,7 +62,7 @@ const SearchScreen = ({route}) => {
                             <Image source={require('../img/no-img.jpg')} style={styles.avatar} />
                         </View>
                             <Text style={styles.name}>{k.driver}</Text>
-                            <Text style={styles.tripInfoPrice}>300</Text>
+                            <Text style={styles.tripInfoPrice}>{k.price}</Text>
                         </View>
                     </View>
                     )}
