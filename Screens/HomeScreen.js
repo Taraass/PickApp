@@ -1,20 +1,19 @@
-import React, { useState,Component } from 'react'
-
-import {View, Text, StyleSheet, ImageBackground, TextInput,Button, TouchableOpacity} from 'react-native'
+import React, { useState } from 'react'
+import {View, Text, StyleSheet, ImageBackground, TextInput, TouchableOpacity, ScrollView} from 'react-native'
 import { Entypo } from '@expo/vector-icons';
-import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import DatePicker from 'react-native-datepicker'
-
 
 export default function HomeScreen({ navigation: { navigate } }) {
 
     const [departune, setDepartune] = useState("")
     const [arrival, setArrival] = useState("")
     const [numberOfPass, setNumberOfPass] = useState("")
-
     const [date, setDate] = useState(new Date())
+    console.log(date);
+    
     return (
+        
         <View style={styles.container}>
             <ImageBackground
                 style={styles.mainpicture}
@@ -59,12 +58,16 @@ export default function HomeScreen({ navigation: { navigate } }) {
                             setDate(date);
                         }}
                     />
-                    <TouchableOpacity style={styles.place} onPress={() => setNumberOfPass(numberOfPass)}>
+                    <View style={styles.place}>
                         <Ionicons name="person" style={styles.iconPerson} size={24} color="black" />
-                        <TextInput style = {styles.number}>{'1'}</TextInput>
-                    </TouchableOpacity>
+                        <TextInput style = {styles.number}
+                        onChangeText={numberOfPass => setNumberOfPass(numberOfPass)}
+                        value={numberOfPass}
+                        placeholder='_'/>
+                    </View>
                 </View>
-                <TouchableOpacity style={styles.button} onPress={() => navigate("Search", {depart: departune, arr: arrival})}>
+                
+                <TouchableOpacity style={styles.button} onPress={() => navigate("Search", {depart: departune, arr: arrival, month: date.getMonth(), day: date.getDate()})}>
                     <Text style={{color: "#fff", fontWeight: "500"}}>Search</Text>
                 </TouchableOpacity>
             </ImageBackground>
@@ -72,12 +75,6 @@ export default function HomeScreen({ navigation: { navigate } }) {
         );
 }
 const styles = StyleSheet.create({
-    shit:{
-        marginTop: 20,
-        width: 200,
-        height:200,
-        color: 'red'
-    },
     datePickerStyle: {
         width: 150,
         marginTop: 20,
@@ -85,9 +82,6 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-    },
-    datePicker: {
-        height:300,
     },
     mainpicture: {
         marginTop: 0,
@@ -98,7 +92,7 @@ const styles = StyleSheet.create({
     modal: {
         width: '80%',
         height: 200,
-        marginTop: '100%',
+        marginTop: '80%',
         paddingTop: 20,
         borderRadius: 30,
         backgroundColor: '#fff',

@@ -1,80 +1,121 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {View, Text, StyleSheet, ImageBackground, TextInput, TouchableOpacity} from 'react-native'
-import { MaterialIcons } from '@expo/vector-icons';
+import DatePicker from 'react-native-datepicker'
 import { AntDesign } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons'; 
 import { collection, addDoc} from "firebase/firestore";
 import {auth} from '../firebaseAuth';
 import {db} from '../firebaseStorage'
 
-export default class PostScreen extends React.Component {
+export default function PostScreen () {
 
-    state = {
-        arrival: "",
-        depart: "",
-        driverName: "",
-        userId: ""
-    }
+    const [departune, setDepartune] = useState("")
+    const [arrival, setArrival] = useState("")
+    const [price, setPrice] = useState("")
+    const [date, setDate] = useState(new Date())
+    console.log(date);
+    console.log('Test', new Date(date).getMonth());
+    console.log('Test', new Date(date).getDate());
 
-    storeData = async() => {
+
+    const storeData = async() => {
         try {
             const user = auth.currentUser;
-            this.state.userId = user.uid;
-            this.state.driverName = user.displayName;
+            if(arrival !== "" && departune !== "" && price !== "") {
             await addDoc(collection(db, "Trip"), {
-              arrive: this.state.arrival,
-              departune: this.state.depart,
-              driver: this.state.driverName,
-              userId: this.state.userId
+              arrive: arrival,
+              departune: departune,
+              driver: user.displayName,
+              userId: user.uid,
+              price: price,
+              //month: month,
+              //day: day
             });
-            alert("Поїздку додано!");
+            alert("Trip was added!");
+            } else {
+                alert("Info can not be empty!");
+            }
         } catch (e) {
             alert("Error adding document: ", e);
         }
     }
 
-    render() {
-        return (
-            <View style={styles.container}>
-                <ImageBackground
-                    style={styles.mainpicture}
-                    source={require('../img/logoTestfree.jpg')}
-                >
-                    <View style={styles.modal}>
-                <AntDesign name="caretdown" size={18} color="black" />
-                    <TextInput style ={styles.input} autoCapitalize = "none"
-                        onChangeText={depart => this.setState({depart})}
-                        value={this.state.depart}
-                        placeholder='Route from ...'/>
-                <AntDesign name="caretdown" size={18} color="black" />
-                </View>
+    
+    return (
+        <View style={styles.container}>
+            <ImageBackground
+                style={styles.mainpicture}
+                source={require('../img/logoTestfree.jpg')}
+            >
                 <View style={styles.modal}>
-                <AntDesign name="caretup" size={18} color="black" />
-                    <TextInput style ={styles.input} autoCapitalize = "none"
-                        onChangeText={arrival => this.setState({arrival})}
-                        value={this.state.arrival}
-                        placeholder='Route to ...'/>
-                <AntDesign name="caretup" size={18} color="black" />
-                </View>
-                <View style={styles.modal2}>
-                <Text style = {styles.textQuestion}>{'When are you going to ride?'}</Text>
-                <TouchableOpacity style={styles.place} onPress={() => alert('Треба, щоб хтось зробив ту дату, бляха')}>
-                    <MaterialIcons name="date-range" style={styles.iconDate} size={30} color="black" />
-                    <Text style = {styles.textToday}>{'Today'}</Text>
-                </TouchableOpacity>
-                </View>
-                <TouchableOpacity style={styles.button} onPress={() => this.storeData()}>
-                    <Text style={{color: "#fff", fontWeight: "500"}}>Create a trip</Text>
-                </TouchableOpacity>
-                </ImageBackground>
+            <AntDesign name="caretdown" size={18} color="black" />
+                <TextInput style ={styles.input} autoCapitalize = "none"
+                    onChangeText={departune => setDepartune(departune)}
+                    value={departune}
+                    placeholder='Route from ...'/>
+            <AntDesign name="caretdown" size={18} color="black" />
             </View>
-        );
-    }
+            <View style={styles.modal}>
+            <AntDesign name="caretup" size={18} color="black" />
+                <TextInput style ={styles.input} autoCapitalize = "none"
+                    onChangeText={arrival => setArrival(arrival)}
+                    value={arrival}
+                    placeholder='Route to ...'/>
+            <AntDesign name="caretup" size={18} color="black" />
+            </View>
+            <View style={styles.modal2}>
+                <Text style = {styles.textQuestion}>{'When are you going to ride?'}</Text>
+                <DatePicker
+                        style={styles.datePickerStyle}
+                        date={date} //initial date from state
+                        mode="date" //The enum of date, datetime and time
+                        placeholder="select date"
+                        format="DD-MM-YYYY"
+                        maxDate="31-12-2022"
+                        minDate={new Date()}
+                        confirmBtnText="Confirm"
+                        cancelBtnText="Cancel"
+                        customStyles={{
+                            dateIcon: {
+                                //display: 'none',
+                                position: 'absolute',
+                                left: 0,
+                                top: 4,
+                                marginLeft: 0,
+                            },
+                            dateInput: {
+                                marginLeft: 36,
+                            },
+                        }}
+                        onDateChange={(date) => {
+                            setDate(date);
+                        }}
+                    />
+                <View style={styles.place}>
+                    <FontAwesome name="money" style={styles.iconPerson} size={24} color="black" />
+                    <TextInput style = {styles.number}
+                        onChangeText={price => setPrice(price)}
+                        value={price}
+                        placeholder='Price'/>
+                </View>
+            </View>
+            
+            <TouchableOpacity style={styles.button} onPress={() => storeData()}>
+                <Text style={{color: "#fff", fontWeight: "500"}}>Create a trip</Text>
+            </TouchableOpacity>
+            </ImageBackground>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        
+    },
+    datePickerStyle: {
+        width: 150,
+        marginTop: 20,
+        marginLeft: 20
     },
     mainpicture: {
         flexDirection: 'column',
@@ -86,8 +127,8 @@ const styles = StyleSheet.create({
     },
     modal: {
         width: '80%',
-        height: 80,
-        marginTop: 20,
+        height: 75,
+        marginTop: 10,
         paddingTop: 10,
         padding:'2%',
         borderRadius: 30,
@@ -98,7 +139,7 @@ const styles = StyleSheet.create({
     },
     modal2: {
         width: '80%',
-        height: 100,
+        height: 110,
         marginTop: 20,
         paddingTop: 10,
         borderRadius: 30,
@@ -142,17 +183,15 @@ const styles = StyleSheet.create({
     },
     iconPerson: {
         color: 'grey',
-        marginLeft: '30%',
+        marginLeft: '14%',
         marginRight: 15
     },
     place: {
-        marginTop: 25,
+        marginTop: 40,
         flexDirection: "row",
-        justifyContent: 'center',
     },
     number: {
         color: 'grey',
-        marginTop: 2,
         fontSize: 18,
     }
 });
